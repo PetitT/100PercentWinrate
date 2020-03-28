@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviourPun
     [SerializeField] private PlayerStatsSetter statsSetter;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerWeaponCollider weaponCollider;
+    [SerializeField] private Animator anim;
 
     private float attackFrequency;
     private float minAttackFrequency;
@@ -89,10 +90,18 @@ public class PlayerAttack : MonoBehaviourPun
                         GameObject newProjectile = PunPool.Instance.GetItemFromPool(projectilePrefab, shootPosition.position, shootPosition.rotation);
                         photonView.RPC("SetProjectileValues", RpcTarget.AllBuffered, newProjectile.GetComponent<PhotonView>().ViewID, projectileSpeed, projectileDamage, projectileSize);
                         remainingAttackFrequency = attackFrequency;
+                        StartCoroutine("AnimCoolDown");
+                        photonView.RPC("ToggleAnim", RpcTarget.AllBuffered, true);
                     }
                 }
             }
         }
+    }
+
+    private IEnumerator AnimCoolDown()
+    {
+        yield return new WaitForEndOfFrame();
+        photonView.RPC("ToggleAnim", RpcTarget.AllBuffered, false);
     }
 
     private void CoolDown()
@@ -106,5 +115,11 @@ public class PlayerAttack : MonoBehaviourPun
         GameObject projectile = PhotonView.Find(projectileID).gameObject;
         projectile.GetComponent<ProjectileBehaviour>().Initialize(projectileSpeed, projectileDamage);
         projectile.transform.localScale = new Vector2(projectileSize, projectileSize);
+    }
+
+    [PunRPC]
+    private void ToggleAnim(bool toggle)
+    {
+        anim.SetBool("Shoot", toggle);
     }
 }

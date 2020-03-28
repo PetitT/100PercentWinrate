@@ -53,6 +53,10 @@ MonoBehaviour:
   - AddValueToDictionnary
   - Initialize
   - AddToList
+  - SetName
+  - HideName
+  - PlayAnim
+  - ToggleAnim
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

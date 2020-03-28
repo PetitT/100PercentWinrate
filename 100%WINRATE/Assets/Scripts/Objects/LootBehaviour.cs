@@ -10,6 +10,11 @@ public class LootBehaviour : MonoBehaviourPun
         photonView.RPC("Hide", RpcTarget.AllBuffered, photonView.ViewID);
     }
 
+    private void OnEnable()
+    {
+        GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+    }
+
     [PunRPC]
     private void Hide(int ID)
     {

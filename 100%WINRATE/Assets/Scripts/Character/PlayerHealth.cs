@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviourPun
         remainingHealthRegenFrequency = healthRegenFrequency;
         minHealthRegenFrequency = DataManager.Instance.minHealthRegenFrequency;
         healthRegenValue = DataManager.Instance.healthRegenValue;
-        healthDisplay.UpdateHealth(currentHealth);
+        healthDisplay.UpdateHealth(currentHealth, maxHealth);
     }
 
 
@@ -70,7 +70,7 @@ public class PlayerHealth : MonoBehaviourPun
             {
                 healthRegenFrequency = minHealthRegenFrequency;
             }
-            healthDisplay.UpdateHealth(currentHealth);
+            healthDisplay.UpdateHealth(currentHealth, maxHealth);
         }
     }
 
@@ -79,7 +79,7 @@ public class PlayerHealth : MonoBehaviourPun
         if (photonView.IsMine)
         {
             currentHealth -= damage;
-            healthDisplay.UpdateHealth(currentHealth);
+            healthDisplay.UpdateHealth(currentHealth, maxHealth);
             if (currentHealth <= 0)
             {
                 onDeath?.Invoke();
@@ -107,7 +107,7 @@ public class PlayerHealth : MonoBehaviourPun
             {
                 currentHealth = maxHealth;
             }
-            healthDisplay.UpdateHealth(currentHealth);
+            healthDisplay.UpdateHealth(currentHealth, maxHealth);
         }
     }
 }

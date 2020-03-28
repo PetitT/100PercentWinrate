@@ -51,7 +51,7 @@ public class PlayerSize : MonoBehaviourPun
             float X = avatar.transform.localScale.x + stats.bodySize;
             float Y = avatar.transform.localScale.y + stats.bodySize;
             photonView.RPC("ChangeScale", RpcTarget.AllBuffered, avatar.GetComponent<PhotonView>().ViewID, X, Y);
-            cam.orthographicSize += stats.bodySize;
+            cam.orthographicSize += stats.bodySize * 1.5f;
         }
     }
 

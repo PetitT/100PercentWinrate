@@ -6,19 +6,11 @@ using UnityEngine.UI;
 
 public class PlayerHealthDisplay : MonoBehaviourPun
 {
-    [SerializeField] private Text text;
+    [SerializeField] private GameObject healthBar;
 
-    public void UpdateHealth(float currentHealth)
+    public void UpdateHealth(float currentHealth, float maxHealth)
     {
-        if (photonView.IsMine)
-        {
-            photonView.RPC("DisplayHealth", RpcTarget.AllBuffered, currentHealth);
-        }
-    }
-
-    [PunRPC]
-    private void DisplayHealth(float currentHealth)
-    {
-        text.text = currentHealth.ToString();
+        float normalizedHealth = currentHealth / maxHealth;
+        healthBar.transform.localScale = new Vector2(normalizedHealth, 1);
     }
 }
