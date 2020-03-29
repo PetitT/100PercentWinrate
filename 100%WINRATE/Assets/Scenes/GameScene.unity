@@ -2053,7 +2053,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3505,77 +3505,7 @@ PrefabInstance:
     - target: {fileID: 390991603868786909, guid: 3841c1d0c43347542a69f78222e20678,
         type: 3}
       propertyPath: viewIdField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: moveSpeedBuff
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: AttackFrequencyBuff
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: baseProjectileSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: projectileSpeedBuff
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: bodySizeBuff
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: projectileSizeBuff
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: healthBuff
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: minAttackFrequency
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: healthRegenValue
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: healthRegenFrequency
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: minHealthRegenFrequency
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: healthRegenValueBuff
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: healthRegenFrequencyBuff
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
-        type: 3}
-      propertyPath: projectileDamageBuff
-      value: 0.2
+      value: 999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3841c1d0c43347542a69f78222e20678, type: 3}

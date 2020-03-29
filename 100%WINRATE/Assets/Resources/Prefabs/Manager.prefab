@@ -99,17 +99,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 5
   baseAttackFrequency: 1
-  baseProjectileSpeed: 5
-  baseProjectileSize: 0.4
+  baseProjectileSpeed: 6
+  baseProjectileSize: 0.5
   baseProjectileDamage: 1
+  minAttackFrequency: 0.25
   baseHealth: 3
-  moveSpeedBuff: 1
-  AttackFrequencyBuff: 0.2
-  projectileSpeedBuff: 1
-  projectileDamageBuff: 1
+  healthRegenValue: 0.1
+  healthRegenFrequency: 1
+  minHealthRegenFrequency: 1
+  moveSpeedBuff: 0.1
+  AttackFrequencyBuff: 0.025
+  projectileSpeedBuff: 0.2
+  projectileDamageBuff: 0.1
   projectileSizeBuff: 0.2
-  bodySizeBuff: 1
-  healthBuff: 2
+  bodySizeBuff: 0.2
+  healthBuff: 1
+  healthRegenValueBuff: 0.1
+  healthRegenFrequencyBuff: 0
   timeBetweenSpawns: 5
   numberOfLootAtStart: 20
 --- !u!114 &390991603868786911

@@ -13,26 +13,38 @@ public class PlayerDeath : MonoBehaviourPun
 
     private void Start()
     {
-        health.onDeath += OnDeathHandler;
+        if (photonView.IsMine)
+        {
+            health.onDeath += OnDeathHandler;
+        }
     }
 
     private void OnDisable()
     {
-        health.onDeath -= OnDeathHandler;
+        if (photonView.IsMine)
+        {
+            health.onDeath -= OnDeathHandler;
+        }
     }
 
     private void OnDeathHandler()
     {
-        photonView.RPC("SpawnLoot", RpcTarget.AllBuffered, score.Score, avatar.GetComponent<PhotonView>().ViewID);
-        photonView.RPC("Respawn", RpcTarget.AllBuffered, avatar.GetComponent<PhotonView>().ViewID);
+        if (photonView.IsMine)
+        {
+            photonView.RPC("SpawnLoot", RpcTarget.AllBuffered, score.Score, avatar.GetComponent<PhotonView>().ViewID);
+            photonView.RPC("Respawn", RpcTarget.AllBuffered, avatar.GetComponent<PhotonView>().ViewID);
+        }
     }
 
     [PunRPC]
     private void SpawnLoot(int score, int playerID)
     {
+        int numberOfBalls = (int)(score / 2);
+        Debug.Log("score = " + score);
+        Debug.Log("numberOfBalls = " + numberOfBalls);
         Bounds spriteBounds = PhotonView.Find(playerID).GetComponentInChildren<SpriteRenderer>().sprite.bounds;
         GameObject player = PhotonView.Find(playerID).gameObject;
-        for (int i = 0; i < score + 1; i++)
+        for (int i = 0; i < numberOfBalls; i++)
         {
             PunPool.Instance.GetItemFromPool(
                 StringsManager.Instance.loot,

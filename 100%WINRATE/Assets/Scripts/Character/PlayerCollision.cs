@@ -1,30 +1,35 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 public class PlayerCollision : MonoBehaviourPun
 {
+    [SerializeField] private PhotonView pv;
     public event Action<float> onHit;
     public event Action onLoot;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (photonView.IsMine)
+        if (collision.GetComponent<ProjectileBehaviour>() != null)
         {
-            if (collision.GetComponent<ProjectileBehaviour>() != null)
+            if (collision.GetComponent<ProjectileBehaviour>().ID != pv.ViewID)
             {
-                float damage = collision.GetComponent<ProjectileBehaviour>().Damage;
-                onHit?.Invoke(damage);
-                collision.GetComponent<ProjectileBehaviour>().HideObject();
+                if (photonView.IsMine)
+                {
+                    float damage = collision.GetComponent<ProjectileBehaviour>().Damage;
+                    onHit?.Invoke(damage);
+                    collision.GetComponent<ProjectileBehaviour>().HideObject();
+                    Debug.Log("Hit for " + damage);
+                }
             }
+        }
 
-            if (collision.GetComponent<LootBehaviour>() != null)
-            {
-                onLoot?.Invoke();
-                collision.GetComponent<LootBehaviour>().HideObject();
-            }
+        if (collision.GetComponent<LootBehaviour>() != null)
+        {
+            onLoot?.Invoke();
+            collision.GetComponent<LootBehaviour>().HideObject();
         }
     }
 }

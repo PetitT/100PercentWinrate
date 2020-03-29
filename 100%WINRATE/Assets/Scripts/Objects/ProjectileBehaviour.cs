@@ -10,18 +10,21 @@ public class ProjectileBehaviour : MonoBehaviourPun
     private float remainingLifeTime;
     private float speed;
     private float damage;
+    private int id;
 
     public float Damage { get => damage; private set => damage = value; }
+    public int ID { get => id; private set => id = value; }
 
     private void OnEnable()
     {
         remainingLifeTime = lifeTime;
     }
 
-    public void Initialize(float projectileSpeed, float projectileDamage)
+    public void Initialize(float projectileSpeed, float projectileDamage, int shooterID)
     {
         speed = projectileSpeed;
         Damage = projectileDamage;
+        ID = shooterID;
     }
 
     private void Update()

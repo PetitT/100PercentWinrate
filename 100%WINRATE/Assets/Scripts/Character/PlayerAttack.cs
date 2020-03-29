@@ -113,7 +113,7 @@ public class PlayerAttack : MonoBehaviourPun
     private void SetProjectileValues(int projectileID, float projectileSpeed, float projectileDamage, float projectileSize)
     {
         GameObject projectile = PhotonView.Find(projectileID).gameObject;
-        projectile.GetComponent<ProjectileBehaviour>().Initialize(projectileSpeed, projectileDamage);
+        projectile.GetComponent<ProjectileBehaviour>().Initialize(projectileSpeed, projectileDamage, photonView.ViewID);
         projectile.transform.localScale = new Vector2(projectileSize, projectileSize);
     }
 
