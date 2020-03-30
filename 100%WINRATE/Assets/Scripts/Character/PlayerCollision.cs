@@ -12,11 +12,11 @@ public class PlayerCollision : MonoBehaviourPun
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<ProjectileBehaviour>() != null)
+        if (photonView.IsMine)
         {
-            if (collision.GetComponent<ProjectileBehaviour>().ID != pv.ViewID)
+            if (collision.CompareTag("Projectile"))
             {
-                if (photonView.IsMine)
+                if (collision.GetComponent<ProjectileBehaviour>().ID != pv.ViewID)
                 {
                     float damage = collision.GetComponent<ProjectileBehaviour>().Damage;
                     onHit?.Invoke(damage);
@@ -24,12 +24,12 @@ public class PlayerCollision : MonoBehaviourPun
                     Debug.Log("Hit for " + damage);
                 }
             }
-        }
 
-        if (collision.GetComponent<LootBehaviour>() != null)
-        {
-            onLoot?.Invoke();
-            collision.GetComponent<LootBehaviour>().HideObject();
+            if (collision.CompareTag("Loot"))
+            {
+                onLoot?.Invoke();
+                collision.GetComponent<LootBehaviour>().HideObject();
+            }
         }
     }
 }

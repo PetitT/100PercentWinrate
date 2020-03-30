@@ -34,4 +34,8 @@ public class DataManager : Singleton<DataManager>
     [Header("LootSpawn")]
     public float timeBetweenSpawns;
     public int numberOfLootAtStart;
+
+    [Header("Cheats")]
+    public string statsBuffCheat;
+    public int statsBuffAmount;
 }

@@ -58,6 +58,9 @@ MonoBehaviour:
   - PlayAnim
   - ToggleAnim
   - SetRandomColor
+  - AddPlayer
+  - AddPlayerEntry
+  - RemovePlayerEntry
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1

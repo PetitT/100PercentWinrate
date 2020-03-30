@@ -8,4 +8,5 @@ public class StringsManager : Singleton<StringsManager>
     public string player;
     public string projectile;
     public string loot;
+    public string playerEntry;
 }

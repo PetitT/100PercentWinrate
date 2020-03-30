@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 390991603868786911}
   - component: {fileID: 911567092}
   - component: {fileID: 139906891628190504}
+  - component: {fileID: 390991602880459570}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -108,13 +109,13 @@ MonoBehaviour:
   healthRegenFrequency: 1
   minHealthRegenFrequency: 1
   moveSpeedBuff: 0.1
-  AttackFrequencyBuff: 0.025
+  AttackFrequencyBuff: 0.015
   projectileSpeedBuff: 0.2
-  projectileDamageBuff: 0.1
+  projectileDamageBuff: 0.075
   projectileSizeBuff: 0.2
   bodySizeBuff: 0.2
   healthBuff: 1
-  healthRegenValueBuff: 0.1
+  healthRegenValueBuff: 0.05
   healthRegenFrequencyBuff: 0
   timeBetweenSpawns: 5
   numberOfLootAtStart: 20
@@ -134,6 +135,7 @@ MonoBehaviour:
   player: Player
   projectile: Projectile
   loot: Loot
+  playerEntry: PlayerEntry
 --- !u!114 &911567092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,3 +166,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minXminY: {fileID: 0}
   maxXmaxY: {fileID: 0}
+--- !u!114 &390991602880459570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390991603868786906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a27fa006755af458bf6c1080a0cec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entryParent: {fileID: 0}
