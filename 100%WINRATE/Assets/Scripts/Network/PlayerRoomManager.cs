@@ -1,31 +1,27 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerRoomManager : MonoBehaviourPunCallbacks
 {
-    private void Start()
+    public override void OnEnable()
     {
-        if (photonView.IsMine)
-        {
-            PlayerList.Instance.AddPlayer(photonView);
-        }
+        base.OnEnable();
+        PhotonNetwork.AddCallbackTarget(this);
     }
 
-    private void Update()
+    public override void OnDisable()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayerList.Instance.RemovePlayer(photonView);
-        }
+        base.OnDisable();
+        PhotonNetwork.RemoveCallbackTarget(this);
     }
 
-    private void OnDestroy()
+    public override void OnDisconnected(DisconnectCause cause)
     {
-        if (photonView.IsMine)
-        {
-            PlayerList.Instance.RemovePlayer(photonView);
-        }
+        base.OnDisconnected(cause);
+        Debug.Log("hiku");
+        PhotonNetwork.DestroyPlayerObjects(photonView.ViewID);
     }
 }

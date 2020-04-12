@@ -13,6 +13,12 @@ public class PlayerSize : MonoBehaviourPun
     private float baseCamSize;
     private float currentCamSize;
 
+    private float baseGrowSpeed;
+    private float growSpeed;
+
+    private float targetBodyScale;
+    private float targetCamScale;
+
     private void Start()
     {
         if (photonView.IsMine)
@@ -22,8 +28,19 @@ public class PlayerSize : MonoBehaviourPun
         }
 
         cam = Camera.main;
-        baseCamSize = cam.orthographicSize;
-        currentCamSize = baseCamSize;
+        targetCamScale = cam.orthographicSize;
+        targetBodyScale = avatar.transform.localScale.x;
+        baseGrowSpeed = DataManager.Instance.growSpeed;
+    }
+
+    private void Update()
+    {
+        if (photonView.IsMine)
+        {
+            GrowBody();
+            GrowCamera();
+            CheckGrowSpeed();
+        }
     }
 
     private void OnDisable()
@@ -39,7 +56,7 @@ public class PlayerSize : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            photonView.RPC("ChangeScale", RpcTarget.AllBuffered, avatar.GetComponent<PhotonView>().ViewID, 1f, 1f);
+            avatar.transform.localScale = new Vector2(1, 1);
             cam.orthographicSize = baseCamSize;
         }
     }
@@ -48,16 +65,34 @@ public class PlayerSize : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            float X = avatar.transform.localScale.x + stats.bodySize;
-            float Y = avatar.transform.localScale.y + stats.bodySize;
-            photonView.RPC("ChangeScale", RpcTarget.AllBuffered, avatar.GetComponent<PhotonView>().ViewID, X, Y);
-            cam.orthographicSize += stats.bodySize * 1.5f;
+            targetBodyScale += stats.bodySize;
+            targetCamScale += stats.bodySize * 1.5f;
         }
     }
 
-    [PunRPC]
-    private void ChangeScale(int playerID, float X, float Y)
+    private void GrowBody()
     {
-        PhotonView.Find(playerID).transform.localScale = new Vector2(X, Y);
+        if (avatar.transform.localScale.x <= targetBodyScale)
+        {
+            float X = avatar.transform.localScale.x + growSpeed * Time.deltaTime;
+            float Y = avatar.transform.localScale.y + growSpeed * Time.deltaTime;
+
+            avatar.transform.localScale = new Vector2(X, Y);
+        }
     }
+
+    private void GrowCamera()
+    {
+        if (cam.orthographicSize <= targetCamScale)
+        {
+            cam.orthographicSize += growSpeed * Time.deltaTime;
+        }
+    }
+
+    private void CheckGrowSpeed()
+    {
+        float statsToGrow = (targetBodyScale - avatar.transform.localScale.x) / DataManager.Instance.bodySizeBuff;
+        growSpeed = baseGrowSpeed * statsToGrow/2;
+    }
+
 }

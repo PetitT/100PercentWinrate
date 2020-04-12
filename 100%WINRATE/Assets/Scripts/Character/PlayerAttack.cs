@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviourPun
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerWeaponCollider weaponCollider;
     [SerializeField] private Animator anim;
+    [SerializeField] private GameObject projectile;
 
     private float attackFrequency;
     private float minAttackFrequency;
@@ -87,11 +88,7 @@ public class PlayerAttack : MonoBehaviourPun
                 {
                     if (Input.GetMouseButton(0))
                     {
-                        GameObject newProjectile = PunPool.Instance.GetItemFromPool(projectilePrefab, shootPosition.position, shootPosition.rotation);
-                        photonView.RPC("SetProjectileValues", RpcTarget.AllBuffered, newProjectile.GetComponent<PhotonView>().ViewID, projectileSpeed, projectileDamage, projectileSize);
-                        remainingAttackFrequency = attackFrequency;
-                        StartCoroutine("AnimCoolDown");
-                        photonView.RPC("ToggleAnim", RpcTarget.AllBuffered, true);
+                        Shoot();
                     }
                 }
             }
@@ -109,12 +106,28 @@ public class PlayerAttack : MonoBehaviourPun
         remainingAttackFrequency -= Time.deltaTime;
     }
 
-    [PunRPC]
-    private void SetProjectileValues(int projectileID, float projectileSpeed, float projectileDamage, float projectileSize)
+    private void Shoot()
     {
-        GameObject projectile = PhotonView.Find(projectileID).gameObject;
-        projectile.GetComponent<ProjectileBehaviour>().Initialize(projectileSpeed, projectileDamage, photonView.ViewID);
-        projectile.transform.localScale = new Vector2(projectileSize, projectileSize);
+        Vector3 currentRotation = shootPosition.transform.rotation.eulerAngles;
+        photonView.RPC("SetOfflineProjectileValue", RpcTarget.All,
+            projectileSpeed, projectileDamage, photonView.ViewID, projectileSize,
+            transform.up.x, transform.up.y,
+            shootPosition.position.x, shootPosition.position.y,
+            currentRotation.x, currentRotation.y, currentRotation.z
+            );
+        photonView.RPC("ToggleAnim", RpcTarget.All, true);
+        remainingAttackFrequency = attackFrequency;
+        StartCoroutine("AnimCoolDown");
+    }
+
+    [PunRPC]
+    private void SetOfflineProjectileValue(float speed, float damage, int ID, float size, float XDir, float YDir, float XPos, float YPos, float XRot, float YRot, float ZRot)
+    {
+        GameObject newProjectile = Instantiate(projectile, new Vector2(XPos, YPos), Quaternion.Euler(XRot, YRot, ZRot));
+        newProjectile.GetComponent<ProjectileOfflineBehaviour>().Initialize(
+            speed, damage, new Vector2(XDir, YDir), ID
+            );
+        newProjectile.transform.localScale = new Vector2(size, size);
     }
 
     [PunRPC]

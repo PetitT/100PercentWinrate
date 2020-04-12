@@ -38,4 +38,7 @@ public class DataManager : Singleton<DataManager>
     [Header("Cheats")]
     public string statsBuffCheat;
     public int statsBuffAmount;
+
+    [Header("Grow")]
+    public float growSpeed;
 }

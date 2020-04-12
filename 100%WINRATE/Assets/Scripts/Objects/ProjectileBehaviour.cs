@@ -9,36 +9,31 @@ public class ProjectileBehaviour : MonoBehaviourPun
     [SerializeField] private float lifeTime;
     private float remainingLifeTime;
     private float speed;
+    private Vector2 rotation;
     private float damage;
     private int id;
 
     public float Damage { get => damage; private set => damage = value; }
     public int ID { get => id; private set => id = value; }
 
-    private void OnEnable()
-    {
-        remainingLifeTime = lifeTime;
-    }
-
-    public void Initialize(float projectileSpeed, float projectileDamage, int shooterID)
+    public void Initialize(float projectileSpeed, float projectileDamage, Vector2 projectileRotation, int shooterID)
     {
         speed = projectileSpeed;
         Damage = projectileDamage;
         ID = shooterID;
+        rotation = projectileRotation;
+        remainingLifeTime = lifeTime;
     }
 
     private void Update()
     {
-        if (photonView.IsMine)
-        {
-            Move();
-            LifeTime();
-        }
+        Move();
+        LifeTime();
     }
 
     private void Move()
     {
-        gameObject.transform.Translate(Vector2.up * speed * Time.deltaTime);
+        gameObject.transform.Translate(rotation * speed * Time.deltaTime);
     }
 
     private void LifeTime()

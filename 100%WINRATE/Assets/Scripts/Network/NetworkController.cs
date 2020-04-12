@@ -41,7 +41,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
     {
         Debug.Log("Creating room");
         int random = Random.Range(0, 10000);
-        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)maxPlayers };
+        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)maxPlayers, CleanupCacheOnLeave = true };
         PhotonNetwork.CreateRoom("Room " + random, roomOps);
     }
 

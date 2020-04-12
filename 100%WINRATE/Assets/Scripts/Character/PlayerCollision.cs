@@ -16,11 +16,10 @@ public class PlayerCollision : MonoBehaviourPun
         {
             if (collision.CompareTag("Projectile"))
             {
-                if (collision.GetComponent<ProjectileBehaviour>().ID != pv.ViewID)
+                if (collision.GetComponent<ProjectileOfflineBehaviour>().ID != pv.ViewID)
                 {
-                    float damage = collision.GetComponent<ProjectileBehaviour>().Damage;
+                    float damage = collision.GetComponent<ProjectileOfflineBehaviour>().Damage;
                     onHit?.Invoke(damage);
-                    collision.GetComponent<ProjectileBehaviour>().HideObject();
                     Debug.Log("Hit for " + damage);
                 }
             }

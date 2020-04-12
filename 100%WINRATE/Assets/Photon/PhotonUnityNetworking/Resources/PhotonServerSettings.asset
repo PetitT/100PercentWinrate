@@ -61,6 +61,7 @@ MonoBehaviour:
   - AddPlayer
   - AddPlayerEntry
   - RemovePlayerEntry
+  - SetOfflineProjectileValue
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
