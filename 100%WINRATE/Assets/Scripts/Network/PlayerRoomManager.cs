@@ -8,20 +8,16 @@ public class PlayerRoomManager : MonoBehaviourPunCallbacks
 {
     public override void OnEnable()
     {
-        base.OnEnable();
         PhotonNetwork.AddCallbackTarget(this);
     }
 
     public override void OnDisable()
     {
-        base.OnDisable();
         PhotonNetwork.RemoveCallbackTarget(this);
     }
 
-    public override void OnDisconnected(DisconnectCause cause)
+    public override void OnLeftRoom()
     {
-        base.OnDisconnected(cause);
-        Debug.Log("hiku");
-        PhotonNetwork.DestroyPlayerObjects(photonView.ViewID);
+        Debug.Log("Hiku");
     }
 }

@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerInfo : PunSingleton<PlayerInfo>
 {
     [SerializeField] private InputField inputField;
-    private PlayerData data;
-
-    public PlayerData Data { get => data; private set => data = value; }
 
     public void SetName()
     {
-        DontDestroyOnLoad(gameObject);
-        Data = new PlayerData() { playerName = inputField.text };
-        Data.playerName = inputField.text;
+        PhotonNetwork.LocalPlayer.NickName = inputField.text;
     }
 }

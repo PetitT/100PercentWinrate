@@ -1,45 +1,84 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerList : PunSingleton<PlayerList>
+public class PlayerList : MonoBehaviourPunCallbacks
 {
+    #region singleton
+    public static PlayerList instance;
+
+    private void Awake()
+    {
+        if (instance)
+            Destroy(this);
+        else
+            instance = this;
+    }
+
+    #endregion
+
     [SerializeField] private Transform entryParent;
-    private Dictionary<PhotonView, GameObject> playerDisplay = new Dictionary<PhotonView, GameObject>();
+    [SerializeField] private GameObject playerEntry;
+    private Dictionary<Player, GameObject> playerDisplay = new Dictionary<Player, GameObject>();
 
-    public void AddPlayer(PhotonView player)
+    public override void OnEnable()
     {
-        photonView.RPC("AddPlayerEntry", RpcTarget.AllBuffered, PlayerInfo.Instance.Data.playerName, player.ViewID);
+        PhotonNetwork.AddCallbackTarget(this);
     }
 
-    public void RemovePlayer(PhotonView player)
+    public override void OnDisable()
     {
-        photonView.RPC("RemovePlayerEntry", RpcTarget.AllBuffered, player.ViewID);
+        PhotonNetwork.RemoveCallbackTarget(this);
     }
 
-    public void UpdateList(PhotonView player, int score)
+    private void Start()
     {
+        photonView.RPC("AddPlayerEntry", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer);
+    }
 
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        photonView.RPC("RemovePlayerEntry", RpcTarget.AllBuffered, otherPlayer);
+    }
+
+    
+    public void UpdateList(Player player, int score)
+    {
+        photonView.RPC("UpdatePlayerScores", RpcTarget.AllBuffered, player, score);
+        photonView.RPC("RearrangeList", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
-    private void AddPlayerEntry(string playerName, int playerID)
+    private void AddPlayerEntry(Player playerToAdd)
     {
-        GameObject newEntry = PhotonNetwork.InstantiateSceneObject(Path.Combine(StringsManager.Instance.photon, StringsManager.Instance.playerEntry), Vector3.zero, Quaternion.identity);
-        Text entryText = newEntry.GetComponent<Text>();
-        entryText.text = playerName + " - " + "0";
-        entryText.transform.SetParent(entryParent);
-        playerDisplay.Add(PhotonView.Find(playerID), newEntry);
+        GameObject newEntry = Instantiate(playerEntry);
+        newEntry.transform.SetParent(entryParent);
+        newEntry.GetComponent<Text>().text = playerToAdd.NickName + " - " + "0";
+        playerDisplay.Add(playerToAdd, newEntry);
     }
 
     [PunRPC]
-    private void RemovePlayerEntry(int playerID)
+    private void RemovePlayerEntry(Player playerToRemove)
     {
-       GameObject entryToRemove = playerDisplay[PhotonView.Find(playerID)];
-       playerDisplay.Remove(PhotonView.Find(playerID));
-       PhotonNetwork.Destroy(entryToRemove);
+        GameObject itemToRemove = playerDisplay[playerToRemove];
+        playerDisplay.Remove(playerToRemove);
+        Destroy(itemToRemove);
+    }
+
+    [PunRPC]
+    private void UpdatePlayerScores(Player player, int score)
+    {
+        string newText = player.NickName + " - " + score.ToString();
+        playerDisplay[player].GetComponent<Text>().text = newText;
+    }
+
+    [PunRPC]
+    private void RearrangeList()
+    {
+
     }
 }

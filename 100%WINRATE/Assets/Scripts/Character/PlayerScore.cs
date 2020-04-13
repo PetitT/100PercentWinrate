@@ -30,6 +30,7 @@ public class PlayerScore : MonoBehaviourPun
         if (photonView.IsMine)
         {
             photonView.RPC("ResetScore", RpcTarget.AllBuffered);
+            PlayerList.instance.UpdateList(PhotonNetwork.LocalPlayer, 0);
         }
     }
 
@@ -38,6 +39,7 @@ public class PlayerScore : MonoBehaviourPun
         if (photonView.IsMine)
         {
             photonView.RPC("AddScore", RpcTarget.AllBuffered);
+            PlayerList.instance.UpdateList(PhotonNetwork.LocalPlayer, score);
         }
     }
 
