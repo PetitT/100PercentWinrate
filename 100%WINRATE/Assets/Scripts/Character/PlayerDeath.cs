@@ -10,6 +10,7 @@ public class PlayerDeath : MonoBehaviourPun
     [SerializeField] private PlayerHealth health;
     [SerializeField] private PlayerScore score;
     [SerializeField] private GameObject avatar;
+    [SerializeField] private GameObject loot;
 
     private void Start()
     {
@@ -40,19 +41,22 @@ public class PlayerDeath : MonoBehaviourPun
     private void SpawnLoot(int score, int playerID)
     {
         int numberOfBalls = (int)(score / 2);
+        if(numberOfBalls < 1)
+        {
+            numberOfBalls = 1;
+        }
+
         Debug.Log("score = " + score);
         Debug.Log("numberOfBalls = " + numberOfBalls);
         Bounds spriteBounds = PhotonView.Find(playerID).GetComponentInChildren<SpriteRenderer>().sprite.bounds;
         GameObject player = PhotonView.Find(playerID).gameObject;
         for (int i = 0; i < numberOfBalls; i++)
         {
-            PunPool.Instance.GetItemFromPool(
-                StringsManager.Instance.loot,
+            Instantiate(loot,
                 new Vector2(
                     player.transform.position.x + (UnityEngine.Random.Range(spriteBounds.min.x, spriteBounds.max.x) * 5),
                     player.transform.position.y + (UnityEngine.Random.Range(spriteBounds.min.y, spriteBounds.max.y) * 5)),
-                Quaternion.identity
-                );
+                Quaternion.identity);
         }
     }
 

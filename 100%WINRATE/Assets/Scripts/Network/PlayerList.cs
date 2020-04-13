@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class PlayerList : MonoBehaviourPunCallbacks
 {
@@ -49,7 +50,7 @@ public class PlayerList : MonoBehaviourPunCallbacks
     public void UpdateList(Player player, int score)
     {
         photonView.RPC("UpdatePlayerScores", RpcTarget.AllBuffered, player, score);
-        photonView.RPC("RearrangeList", RpcTarget.AllBuffered);
+        RearrangeList();
     }
 
     [PunRPC]
@@ -57,7 +58,7 @@ public class PlayerList : MonoBehaviourPunCallbacks
     {
         GameObject newEntry = Instantiate(playerEntry);
         newEntry.transform.SetParent(entryParent);
-        newEntry.GetComponent<Text>().text = playerToAdd.NickName + " - " + "0";
+        newEntry.GetComponent<PlayerEntry>().Initialize(playerToAdd.NickName);
         playerDisplay.Add(playerToAdd, newEntry);
     }
 
@@ -71,14 +72,18 @@ public class PlayerList : MonoBehaviourPunCallbacks
 
     [PunRPC]
     private void UpdatePlayerScores(Player player, int score)
-    {
-        string newText = player.NickName + " - " + score.ToString();
-        playerDisplay[player].GetComponent<Text>().text = newText;
+    {        
+        playerDisplay[player].GetComponent<PlayerEntry>().Score = score;
     }
 
-    [PunRPC]
     private void RearrangeList()
     {
+        var ordered = playerDisplay.OrderByDescending(x => x.Value.GetComponent<PlayerEntry>().Score);
+        entryParent.transform.DetachChildren();
 
+        foreach (var entry in ordered)
+        {
+            entry.Value.transform.SetParent(entryParent.transform);
+        }
     }
 }

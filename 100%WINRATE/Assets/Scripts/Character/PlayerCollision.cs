@@ -27,7 +27,6 @@ public class PlayerCollision : MonoBehaviourPun
             if (collision.CompareTag("Loot"))
             {
                 onLoot?.Invoke();
-                collision.GetComponent<LootBehaviour>().HideObject();
             }
         }
     }

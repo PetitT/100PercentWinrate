@@ -13,6 +13,7 @@ ScriptsOnlyBuild:
     - PlayerBuffCheat
     - PlayerCollision
     - PlayerDeath
+    - PlayerEntry
     - PlayerHealth
     - PlayerHealthDisplay
     - PlayerInfo
@@ -39,8 +40,6 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
-    PhotonUnityNetworking.Editor.dll:
-    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -148,9 +147,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12326}
     - Class: 114
-      Script: {instanceID: 12576}
+      Script: {instanceID: 12464}
     - Class: 114
-      Script: {instanceID: 12614}
+      Script: {instanceID: 12576}
     - Class: 114
       Script: {instanceID: 12948}
     - Class: 114
@@ -167,6 +166,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13978}
     - Class: 114
       Script: {instanceID: 14110}
+    - Class: 114
+      Script: {instanceID: 16272}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -174,6 +175,10 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 212
       Script: {instanceID: 0}
@@ -358,6 +363,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14124}
     - Class: 114
       Script: {instanceID: 14132}
+    - Class: 114
+      Script: {instanceID: 16272}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1317,7 +1324,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: f57b6ba98b581c72f730dee63fc6e7f4
+      Hash: 7e29a552f6a42ddeeb101a3c288af23b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerDeath
@@ -1869,7 +1876,7 @@ ScriptsOnlyBuild:
     className: CrcCheckToggle
   - hash:
       serializedVersion: 2
-      Hash: c92d5342b41bb2ecd8f93f4d99906182
+      Hash: 3e35493f3d8a9cc731076197ab8b1804
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LootInstantiation
@@ -2221,6 +2228,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 4ce15e99c635d2567873d27549d1f16f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerEntry
   platform: 19
   scenePathNames:
   - Assets/Scenes/LogScene.unity

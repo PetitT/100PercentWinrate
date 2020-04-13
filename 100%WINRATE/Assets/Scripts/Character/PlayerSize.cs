@@ -11,6 +11,7 @@ public class PlayerSize : MonoBehaviourPun
     [SerializeField] private GameObject avatar;
     private Camera cam;
     private float baseCamSize;
+    private float baseBodySize;
     private float currentCamSize;
 
     private float baseGrowSpeed;
@@ -29,6 +30,8 @@ public class PlayerSize : MonoBehaviourPun
 
         cam = Camera.main;
         targetCamScale = cam.orthographicSize;
+        baseCamSize = cam.orthographicSize;
+        baseBodySize = avatar.transform.localScale.x;
         targetBodyScale = avatar.transform.localScale.x;
         baseGrowSpeed = DataManager.Instance.growSpeed;
     }
@@ -58,6 +61,8 @@ public class PlayerSize : MonoBehaviourPun
         {
             avatar.transform.localScale = new Vector2(1, 1);
             cam.orthographicSize = baseCamSize;
+            targetCamScale = baseCamSize;
+            targetBodyScale = baseBodySize;
         }
     }
 

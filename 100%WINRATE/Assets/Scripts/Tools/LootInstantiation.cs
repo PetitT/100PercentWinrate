@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class LootInstantiation : MonoBehaviourPun
 {
+    [SerializeField] private GameObject loot;
     [SerializeField] private Transform minXminY, maxXmaxY;
     private float timeBetweenSpawns;
     private float remainingTimeToSpawn;
@@ -36,7 +37,8 @@ public class LootInstantiation : MonoBehaviourPun
 
     private void SpawnItem()
     {
-        PunPool.Instance.GetItemFromPool(StringsManager.Instance.loot, GetRandomPosition(), Quaternion.identity);
+        Vector3 pos = GetRandomPosition();
+        photonView.RPC("Spawn", RpcTarget.AllBuffered, pos.x, pos.y);
     }
 
     private Vector3 GetRandomPosition()
@@ -44,5 +46,11 @@ public class LootInstantiation : MonoBehaviourPun
         float X = UnityEngine.Random.Range(minXminY.position.x, maxXmaxY.position.x);
         float Y = UnityEngine.Random.Range(minXminY.position.y, maxXmaxY.position.y);
         return new Vector3(X, Y);
+    }
+
+    [PunRPC]
+    private void Spawn(float X, float Y)
+    {
+        Instantiate(loot, new Vector2(X, Y), Quaternion.identity);
     }
 }

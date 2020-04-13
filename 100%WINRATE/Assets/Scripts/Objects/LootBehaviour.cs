@@ -5,19 +5,21 @@ using UnityEngine;
 
 public class LootBehaviour : MonoBehaviourPun
 {
-    public void HideObject()
-    {
-        photonView.RPC("Hide", RpcTarget.AllBuffered, photonView.ViewID);
-    }
-
     private void OnEnable()
     {
         GetComponent<SpriteRenderer>().color = Random.ColorHSV();
     }
 
-    [PunRPC]
-    private void Hide(int ID)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        PhotonView.Find(ID).gameObject.SetActive(false);
+        if (collision.CompareTag("Wall"))
+        {
+            gameObject.SetActive(false);
+        }
+
+        if (collision.CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

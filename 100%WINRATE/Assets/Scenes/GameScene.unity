@@ -3521,6 +3521,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 911567092, guid: 3841c1d0c43347542a69f78222e20678, type: 3}
+      propertyPath: objectsToPool.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 911567092, guid: 3841c1d0c43347542a69f78222e20678, type: 3}
+      propertyPath: numberToPoolAtStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 139906891628190504, guid: 3841c1d0c43347542a69f78222e20678,
         type: 3}
       propertyPath: minXminY
@@ -3531,6 +3539,12 @@ PrefabInstance:
       propertyPath: maxXmaxY
       value: 
       objectReference: {fileID: 476189759}
+    - target: {fileID: 139906891628190504, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: loot
+      value: 
+      objectReference: {fileID: 6613020016470054931, guid: 2033177139466e24784f3b3cf89fd880,
+        type: 3}
     - target: {fileID: 390991602880459570, guid: 3841c1d0c43347542a69f78222e20678,
         type: 3}
       propertyPath: entryParent

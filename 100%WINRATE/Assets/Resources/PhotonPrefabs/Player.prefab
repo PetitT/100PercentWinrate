@@ -163,6 +163,7 @@ MonoBehaviour:
   health: {fileID: 203878791224238543}
   score: {fileID: 6908290587542486622}
   avatar: {fileID: 9111023291045335213}
+  loot: {fileID: 6613020016470054931, guid: 2033177139466e24784f3b3cf89fd880, type: 3}
 --- !u!114 &-7720295618136150547
 MonoBehaviour:
   m_ObjectHideFlags: 0
