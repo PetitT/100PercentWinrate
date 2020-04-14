@@ -60,10 +60,16 @@ public class PlayerSize : MonoBehaviourPun
         if (photonView.IsMine)
         {
             avatar.transform.localScale = new Vector2(1, 1);
-            cam.orthographicSize = baseCamSize;
+            StartCoroutine(WaitForRespawn());
             targetCamScale = baseCamSize;
             targetBodyScale = baseBodySize;
         }
+    }
+
+    private IEnumerator WaitForRespawn()
+    {
+        yield return new WaitForSeconds(DataManager.Instance.timeToRespawn);
+        cam.orthographicSize = baseCamSize;
     }
 
     private void OnStatsChangeHandler(Stats stats)
@@ -97,7 +103,7 @@ public class PlayerSize : MonoBehaviourPun
     private void CheckGrowSpeed()
     {
         float statsToGrow = (targetBodyScale - avatar.transform.localScale.x) / DataManager.Instance.bodySizeBuff;
-        growSpeed = baseGrowSpeed * statsToGrow/2;
+        growSpeed = baseGrowSpeed * statsToGrow / 2;
     }
 
 }

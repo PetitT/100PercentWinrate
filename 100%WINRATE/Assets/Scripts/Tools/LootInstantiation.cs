@@ -51,6 +51,6 @@ public class LootInstantiation : MonoBehaviourPun
     [PunRPC]
     private void Spawn(float X, float Y)
     {
-        Instantiate(loot, new Vector2(X, Y), Quaternion.identity);
+        Pool.instance.GetItemFromPool(loot, new Vector2(X, Y), Quaternion.identity);
     }
 }

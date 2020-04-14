@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 390991603868786908}
   - component: {fileID: 390991603868786910}
   - component: {fileID: 390991603868786911}
-  - component: {fileID: 911567092}
   - component: {fileID: 139906891628190504}
   - component: {fileID: 390991602880459570}
+  - component: {fileID: 4729020526907125930}
+  - component: {fileID: 472697393291194581}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -73,19 +74,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPositions:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &390991603868786910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +107,10 @@ MonoBehaviour:
   healthRegenFrequencyBuff: 0
   timeBetweenSpawns: 5
   numberOfLootAtStart: 20
+  statsBuffCheat: cheat
+  statsBuffAmount: 10
+  growSpeed: 0.05
+  timeToRespawn: 3
 --- !u!114 &390991603868786911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,22 +128,6 @@ MonoBehaviour:
   projectile: Projectile
   loot: Loot
   playerEntry: PlayerEntry
---- !u!114 &911567092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390991603868786906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d58b01fbd1379489e7c549d680b48e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectsToPool:
-  - Loot
-  - Projectile
-  numberToPoolAtStart: 10
 --- !u!114 &139906891628190504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5808b3d538186c4fbfc13a9d5da92a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loot: {fileID: 6613020016470054931, guid: 2033177139466e24784f3b3cf89fd880, type: 3}
   minXminY: {fileID: 0}
   maxXmaxY: {fileID: 0}
 --- !u!114 &390991602880459570
@@ -179,3 +156,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entryParent: {fileID: 0}
+  playerEntry: {fileID: 2997636565422944910, guid: 6f2959bf555a336488b0e8ac82363dc9,
+    type: 3}
+--- !u!114 &4729020526907125930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390991603868786906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ec8786c2513c94da0a306bed004ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linePrefab: {fileID: 4865444125897714740, guid: a268d399e29021a4fa962ca48a46542f,
+    type: 3}
+  bottomLeft: {fileID: 0}
+  topRight: {fileID: 0}
+  lineParent: {fileID: 0}
+  distanceBetweenLines: 10
+--- !u!114 &472697393291194581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390991603868786906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d492ba2d38774428f889512099c8b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToPool:
+  - {fileID: 6613020016470054931, guid: 2033177139466e24784f3b3cf89fd880, type: 3}
+  - {fileID: 5953499447622617556, guid: 688a1f7297367114b9547382b8113f7e, type: 3}
+  - {fileID: 5718186890121890710, guid: 70c1cf28ea6b8f744b1e36cc10d3854c, type: 3}
+  numberToCreateAtStart: 10
+  poolParent: {fileID: 0}

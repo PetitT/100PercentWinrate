@@ -9,6 +9,7 @@ public class PlayerCollision : MonoBehaviourPun
     [SerializeField] private PhotonView pv;
     public event Action<float> onHit;
     public event Action onLoot;
+    public event Action<bool> onSlow;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,6 +29,19 @@ public class PlayerCollision : MonoBehaviourPun
             {
                 onLoot?.Invoke();
             }
+
+            if (collision.CompareTag("Slow"))
+            {
+                onSlow?.Invoke(true);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Slow"))
+        {
+            onSlow?.Invoke(false);
         }
     }
 }

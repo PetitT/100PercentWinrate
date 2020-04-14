@@ -46,11 +46,10 @@ public class PlayerList : MonoBehaviourPunCallbacks
         photonView.RPC("RemovePlayerEntry", RpcTarget.AllBuffered, otherPlayer);
     }
 
-    
+
     public void UpdateList(Player player, int score)
     {
         photonView.RPC("UpdatePlayerScores", RpcTarget.AllBuffered, player, score);
-        RearrangeList();
     }
 
     [PunRPC]
@@ -72,8 +71,9 @@ public class PlayerList : MonoBehaviourPunCallbacks
 
     [PunRPC]
     private void UpdatePlayerScores(Player player, int score)
-    {        
+    {
         playerDisplay[player].GetComponent<PlayerEntry>().Score = score;
+        RearrangeList();
     }
 
     private void RearrangeList()

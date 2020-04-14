@@ -10,11 +10,13 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField] private GameObject avatar;
     [SerializeField] private PlayerStatsSetter statsSetter;
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerCollision collision;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float baseDistanceFromWalls;
     private float distanceFromWalls;
     private Camera cam;
-    private float speed;
+    private float targetSpeed;
+    private float currentSpeed;
 
     private void Start()
     {
@@ -22,6 +24,7 @@ public class PlayerMovement : MonoBehaviourPun
         {
             statsSetter.onStatsChange += OnStatsChangeHandler;
             playerHealth.onDeath += OnDeathHandler;
+            collision.onSlow += OnSlowHandler;
             cam = Camera.main;
             Reset();
         }
@@ -34,6 +37,7 @@ public class PlayerMovement : MonoBehaviourPun
         {
             statsSetter.onStatsChange -= OnStatsChangeHandler;
             playerHealth.onDeath -= OnDeathHandler;
+            collision.onSlow -= OnSlowHandler;
         }
     }
 
@@ -45,9 +49,22 @@ public class PlayerMovement : MonoBehaviourPun
         }
     }
 
+    private void OnSlowHandler(bool slow)
+    {
+        if (slow)
+        {
+            currentSpeed = targetSpeed * DataManager.Instance.slowForce / 100;
+        }
+        else
+        {
+            currentSpeed = targetSpeed;
+        }
+    }
+
     private void Reset()
     {
-        speed = DataManager.Instance.baseSpeed;
+        targetSpeed = DataManager.Instance.baseSpeed;
+        currentSpeed = targetSpeed;
         distanceFromWalls = baseDistanceFromWalls;
     }
 
@@ -55,7 +72,8 @@ public class PlayerMovement : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            speed += stats.movementSpeed;
+            targetSpeed += stats.movementSpeed;
+            currentSpeed = targetSpeed;
             distanceFromWalls += stats.bodySize / 2;
         }
     }
@@ -89,7 +107,7 @@ public class PlayerMovement : MonoBehaviourPun
         Vector2 movement = new Vector2(X, Y).normalized;
         if (CheckWalls(movement))
         {
-            avatar.transform.Translate(movement * speed * Time.deltaTime);
+            avatar.transform.Translate(movement * currentSpeed * Time.deltaTime);
         }
     }
 

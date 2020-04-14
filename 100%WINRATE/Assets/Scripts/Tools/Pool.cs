@@ -9,6 +9,7 @@ public class Pool : MonoBehaviour
 
     public List<GameObject> objectsToPool;
     public int numberToCreateAtStart;
+    public Transform poolParent;
 
     private Dictionary<GameObject, List<GameObject>> pool = new Dictionary<GameObject, List<GameObject>>();
 
@@ -38,10 +39,11 @@ public class Pool : MonoBehaviour
             GameObject newItem = Instantiate(item);
             newItem.SetActive(false);
             pool[item].Add(newItem);
+            newItem.transform.SetParent(poolParent);
         }
     }
 
-    public GameObject GetItemFromPool(GameObject item, Vector3 position)
+    public GameObject GetItemFromPool(GameObject item, Vector3 position, Quaternion rotation)
     {
         if (!pool.ContainsKey(item))
         {
@@ -54,8 +56,10 @@ public class Pool : MonoBehaviour
         {
             newItem = Instantiate(item);
             pool[item].Add(newItem);
+            newItem.transform.SetParent(poolParent);
         }
         newItem.transform.position = position;
+        newItem.transform.rotation = rotation;
         newItem.SetActive(true);
 
         return newItem;

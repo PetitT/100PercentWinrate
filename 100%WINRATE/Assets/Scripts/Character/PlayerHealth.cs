@@ -35,6 +35,11 @@ public class PlayerHealth : MonoBehaviourPun
         {
             Regenerate();
         }
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            onDeath?.Invoke();
+        }
     }
 
     private void OnDisable()

@@ -39,6 +39,8 @@ public class DataManager : Singleton<DataManager>
     public string statsBuffCheat;
     public int statsBuffAmount;
 
-    [Header("Grow")]
+    [Header("Other")]
     public float growSpeed;
+    public float timeToRespawn;
+    [Range(0, 100)] public float slowForce;
 }
