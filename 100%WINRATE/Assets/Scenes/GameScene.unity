@@ -3839,7 +3839,7 @@ PrefabInstance:
     - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
         type: 3}
       propertyPath: slowForce
-      value: 75
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
         type: 3}
@@ -3880,6 +3880,26 @@ PrefabInstance:
         type: 3}
       propertyPath: projectileSizeBuff
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: chromaticAberrationMaxValue
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: damagedAnimationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: damagedAnimationSpeedRecover
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: slowObstacleForce
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 472697393291194581, guid: 3841c1d0c43347542a69f78222e20678,
         type: 3}

@@ -11,6 +11,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
     [SerializeField] private int maxPlayers;
 
     [SerializeField] private Button startButton;
+    [SerializeField] private GameObject connectingImage;
 
     private void Start()
     {
@@ -22,7 +23,14 @@ public class NetworkController : MonoBehaviourPunCallbacks
     {
         Debug.Log("Player Connected");
         PhotonNetwork.AutomaticallySyncScene = true;
+        connectingImage.SetActive(false);
         startButton.gameObject.SetActive(true);
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("Failed to connect");
+        connectingImage.GetComponentInChildren<Text>().text = "Failed to connect...";
     }
 
     public void JoinRoom()

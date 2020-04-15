@@ -35,6 +35,11 @@ public class DataManager : Singleton<DataManager>
     public float timeBetweenSpawns;
     public int numberOfLootAtStart;
 
+    [Header("DamagedAnimation")]
+    [Range(0, 5)] public float chromaticAberrationMaxValue;
+    public float damagedAnimationSpeed;
+    public float damagedAnimationSpeedRecover;
+
     [Header("Cheats")]
     public string statsBuffCheat;
     public int statsBuffAmount;
@@ -42,5 +47,5 @@ public class DataManager : Singleton<DataManager>
     [Header("Other")]
     public float growSpeed;
     public float timeToRespawn;
-    [Range(0, 100)] public float slowForce;
+    [Range(0, 100)] public float slowObstacleForce;
 }

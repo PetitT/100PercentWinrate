@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviourPun
     {
         if (slow)
         {
-            currentSpeed = targetSpeed * DataManager.Instance.slowForce / 100;
+            currentSpeed = targetSpeed * DataManager.Instance.slowObstacleForce / 100;
         }
         else
         {

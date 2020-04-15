@@ -29,6 +29,14 @@ public class PlayerDeath : MonoBehaviourPun
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            OnDeathHandler();
+        }
+    }
+
     private void OnDeathHandler()
     {
         if (photonView.IsMine)
@@ -50,13 +58,13 @@ public class PlayerDeath : MonoBehaviourPun
     private void Explode(int playerID, int score)
     {
         Vector2 pos = PhotonView.Find(playerID).gameObject.transform.position;
-        Pool.instance.GetItemFromPool(explosion, pos, Quaternion.identity);
+        GameObject newExplosion = Pool.instance.GetItemFromPool(explosion, pos, Quaternion.identity);
 
         if (score < 1)
         {
             score = 1;
         }
-        explosion.transform.localScale = new Vector3(1 + score * DataManager.Instance.bodySizeBuff, 1 + score * DataManager.Instance.bodySizeBuff, 1);
+        newExplosion.transform.localScale = new Vector2(score * DataManager.Instance.bodySizeBuff, score * DataManager.Instance.bodySizeBuff);
     }
 
     [PunRPC]

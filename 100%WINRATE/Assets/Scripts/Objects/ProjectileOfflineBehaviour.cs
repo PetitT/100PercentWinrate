@@ -6,6 +6,8 @@ using UnityEngine;
 public class ProjectileOfflineBehaviour : MonoBehaviour
 {
     [SerializeField] private float lifeTime;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private TrailRenderer trail;
     private float remainingLifeTime;
     private float speed;
     private Vector2 rotation;
@@ -15,13 +17,20 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
     public float Damage { get => damage; private set => damage = value; }
     public int ID { get => id; private set => id = value; }
 
-    public void Initialize(float projectileSpeed, float projectileDamage, Vector2 projectileRotation, int shooterID)
+    public void Initialize(float projectileSpeed, float projectileDamage, float size, Vector2 projectileRotation, int shooterID, Color projectileColor)
     {
         speed = projectileSpeed;
         Damage = projectileDamage;
         ID = shooterID;
         rotation = projectileRotation;
         remainingLifeTime = lifeTime;
+        transform.localScale = new Vector2(size, size);
+        spriteRenderer.color = projectileColor;
+        trail.Clear();
+        trail.material.color = projectileColor;
+        trail.material.SetColor("_EmissionColor", projectileColor);
+        trail.widthMultiplier = size;
+        Debug.Log(trail.widthMultiplier.ToString());
     }
 
     private void Update()

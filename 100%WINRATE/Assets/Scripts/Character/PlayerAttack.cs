@@ -10,9 +10,11 @@ public class PlayerAttack : MonoBehaviourPun
     [SerializeField] private Transform shootPosition;
     [SerializeField] private PlayerStatsSetter statsSetter;
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerBodySkin bodySkin;
     [SerializeField] private PlayerWeaponCollider weaponCollider;
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject projectile;
+
 
     private float attackFrequency;
     private float minAttackFrequency;
@@ -25,6 +27,7 @@ public class PlayerAttack : MonoBehaviourPun
     private string projectilePrefab;
 
     private bool canShoot = true;
+    private Color projectileColor;
 
     private void Start()
     {
@@ -35,6 +38,7 @@ public class PlayerAttack : MonoBehaviourPun
             prefabPath = StringsManager.Instance.photon;
             projectilePrefab = StringsManager.Instance.projectile;
             minAttackFrequency = DataManager.Instance.minAttackFrequency;
+            projectileColor = bodySkin.PlayerColor;
             ResetDamage();
         }
     }
@@ -71,7 +75,6 @@ public class PlayerAttack : MonoBehaviourPun
         {
             if (attackFrequency >= minAttackFrequency)
             {
-                Debug.Log("Buff");
                 attackFrequency -= stats.attackFrequency;
             }
             projectileSpeed += stats.projectileSpeed;
@@ -108,7 +111,7 @@ public class PlayerAttack : MonoBehaviourPun
     private void CoolDown()
     {
         remainingAttackFrequency -= Time.deltaTime;
-        if(remainingAttackFrequency <= 0)
+        if (remainingAttackFrequency <= 0)
         {
             canShoot = true;
         }
@@ -122,7 +125,8 @@ public class PlayerAttack : MonoBehaviourPun
             projectileSpeed, projectileDamage, photonView.ViewID, projectileSize,
             transform.up.x, transform.up.y,
             shootPosition.position.x, shootPosition.position.y,
-            currentRotation.x, currentRotation.y, currentRotation.z
+            currentRotation.x, currentRotation.y, currentRotation.z,
+            projectileColor.r, projectileColor.g, projectileColor.b, projectileColor.a
             );
 
         photonView.RPC("ToggleAnim", RpcTarget.All, true);
@@ -132,13 +136,15 @@ public class PlayerAttack : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void SetOfflineProjectileValue(float speed, float damage, int ID, float size, float XDir, float YDir, float XPos, float YPos, float XRot, float YRot, float ZRot)
+    private void SetOfflineProjectileValue(float speed, float damage, int ID, float size, float XDir, float YDir, float XPos, float YPos, float XRot, float YRot, float ZRot, float R, float G, float B, float A)
     {
-        GameObject newProjectile = Pool.instance.GetItemFromPool(projectile, new Vector2(XPos, YPos), Quaternion.Euler(XRot, YRot, ZRot));
-        newProjectile.GetComponent<ProjectileOfflineBehaviour>().Initialize(
-            speed, damage, new Vector2(XDir, YDir), ID
+        GameObject newProjectile = Pool.instance.GetItemFromPool(
+            projectile, new Vector2(XPos, YPos), Quaternion.Euler(XRot, YRot, ZRot)
             );
-        newProjectile.transform.localScale = new Vector2(size, size);
+
+        newProjectile.GetComponent<ProjectileOfflineBehaviour>().Initialize(
+            speed, damage, size, new Vector2(XDir, YDir), ID, new Color(R, G, B, A)
+            );
     }
 
     [PunRPC]

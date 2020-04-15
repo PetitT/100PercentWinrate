@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerEntry : MonoBehaviour
 {
     [SerializeField] private Text text;
+    [SerializeField] private Image image;
 
     private string playerName;
     private int score;
@@ -20,9 +21,10 @@ public class PlayerEntry : MonoBehaviour
         }
     }
 
-    public void Initialize(string name)
+    public void Initialize(string name, Color imageColor)
     {
         playerName = name;
+        image.color = imageColor;
         UpdateScore();
     }
 

@@ -25,6 +25,7 @@ public class PlayerList : MonoBehaviourPunCallbacks
     [SerializeField] private Transform entryParent;
     [SerializeField] private GameObject playerEntry;
     private Dictionary<Player, GameObject> playerDisplay = new Dictionary<Player, GameObject>();
+    public Color playerColor;
 
     public override void OnEnable()
     {
@@ -38,7 +39,11 @@ public class PlayerList : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        photonView.RPC("AddPlayerEntry", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer);
+        float r = playerColor.r;
+        float g = playerColor.g;
+        float b = playerColor.b;
+        float a = playerColor.a;
+        photonView.RPC("AddPlayerEntry", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer, r, g, b, a);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -53,11 +58,12 @@ public class PlayerList : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void AddPlayerEntry(Player playerToAdd)
+    private void AddPlayerEntry(Player playerToAdd, float R, float G, float B, float A)
     {
         GameObject newEntry = Instantiate(playerEntry);
         newEntry.transform.SetParent(entryParent);
-        newEntry.GetComponent<PlayerEntry>().Initialize(playerToAdd.NickName);
+        Color playerColor = new Color(R, G, B, A);
+        newEntry.GetComponent<PlayerEntry>().Initialize(playerToAdd.NickName, playerColor);
         playerDisplay.Add(playerToAdd, newEntry);
     }
 
