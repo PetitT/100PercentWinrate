@@ -1,12 +1,13 @@
 {
   "dependencies": {
+    "com.cynaptek.materialpropertieseditor": "https://gitlab.com/cynaptek/packages/material-properties-editor.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.cinemachine": "2.5.0",
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.ide.rider": "1.1.4",
     "com.unity.ide.vscode": "1.1.4",
-    "com.unity.postprocessing": "2.3.0",
+    "com.unity.render-pipelines.universal": "7.1.8",
     "com.unity.test-framework": "1.1.9",
     "com.unity.textmeshpro": "2.0.1",
     "com.unity.timeline": "1.2.10",
@@ -42,5 +43,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.cynaptek.materialpropertieseditor": {
+      "revision": "HEAD",
+      "hash": "7d9aa19c85f5d50048893d762119021e40798705"
+    }
   }
 }

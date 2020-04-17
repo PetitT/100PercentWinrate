@@ -1,0 +1,11 @@
+{
+  "name": "com.cynaptek.materialpropertieseditor",
+  "version": "1.0.6",
+  "displayName": "Material Properties Editor",
+  "description": "Tool to manipulate properties on materials",
+  "unity": "2019.3",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/cynaptek/packages/material-properties-editor.git"
+  }
+}

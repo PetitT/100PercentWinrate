@@ -6,7 +6,8 @@ using System;
 
 public class PlayerMovement : MonoBehaviourPun
 {
-    [SerializeField] private GameObject avatarModel;
+    [SerializeField] private GameObject weaponModel;
+    [SerializeField] private GameObject bodyModel;
     [SerializeField] private GameObject avatar;
     [SerializeField] private PlayerStatsSetter statsSetter;
     [SerializeField] private PlayerHealth playerHealth;
@@ -83,21 +84,21 @@ public class PlayerMovement : MonoBehaviourPun
         if (photonView.IsMine)
         {
             Move();
-            Rotate();
+            RotateWeapon();
         }
     }
 
-    private void Rotate()
+    private void RotateWeapon()
     {
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = cam.ScreenToWorldPoint(mousePosition);
 
         Vector2 direction = new Vector2(
-        mousePosition.x - avatarModel.transform.position.x,
-        mousePosition.y - avatarModel.transform.position.y
+        mousePosition.x - weaponModel.transform.position.x,
+        mousePosition.y - weaponModel.transform.position.y
         );
 
-        avatarModel.transform.up = direction;
+        weaponModel.transform.up = direction;
     }
 
     private void Move()
@@ -109,6 +110,13 @@ public class PlayerMovement : MonoBehaviourPun
         {
             avatar.transform.Translate(movement * currentSpeed * Time.deltaTime);
         }
+
+        RotateBody(movement);
+    }
+
+    private void RotateBody(Vector2 movement)
+    {
+        
     }
 
     private bool CheckWalls(Vector2 movement)
