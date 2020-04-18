@@ -5,7 +5,8 @@ using UnityEngine;
 public class DataManager : Singleton<DataManager>
 {
     [Header("Movement")]
-    public float baseSpeed;
+    public float baseMoveSpeed;
+    public float rotationSpeed;
 
     [Header("Projectile")]
     public float baseAttackFrequency;

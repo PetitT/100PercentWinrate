@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviourPun
     private Camera cam;
     private float targetSpeed;
     private float currentSpeed;
+    private float rotationSpeed;
 
     private void Start()
     {
@@ -64,7 +65,8 @@ public class PlayerMovement : MonoBehaviourPun
 
     private void Reset()
     {
-        targetSpeed = DataManager.Instance.baseSpeed;
+        targetSpeed = DataManager.Instance.baseMoveSpeed;
+        rotationSpeed = DataManager.Instance.rotationSpeed;
         currentSpeed = targetSpeed;
         distanceFromWalls = baseDistanceFromWalls;
     }
@@ -105,18 +107,26 @@ public class PlayerMovement : MonoBehaviourPun
     {
         float X = Input.GetAxisRaw("Horizontal");
         float Y = Input.GetAxisRaw("Vertical");
+
         Vector2 movement = new Vector2(X, Y).normalized;
+
+        if (new Vector2(X, Y) != Vector2.zero)
+        {
+            RotateBody(movement);
+        }
+
         if (CheckWalls(movement))
         {
             avatar.transform.Translate(movement * currentSpeed * Time.deltaTime);
         }
-
-        RotateBody(movement);
     }
 
     private void RotateBody(Vector2 movement)
     {
-        
+        Vector3 direction = -movement;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle += 90;
+        bodyModel.transform.rotation = Quaternion.Slerp(bodyModel.transform.rotation, Quaternion.Euler(0, 0, angle), rotationSpeed * Time.deltaTime);
     }
 
     private bool CheckWalls(Vector2 movement)

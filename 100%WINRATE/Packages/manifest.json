@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.cynaptek.materialpropertieseditor": "https://gitlab.com/cynaptek/packages/material-properties-editor.git",
+    "com.cynaptek.postprocesscontroller": "https://gitlab.com/cynaptek/packages/postprocesscontroller.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.cinemachine": "2.5.0",
@@ -48,6 +49,10 @@
     "com.cynaptek.materialpropertieseditor": {
       "revision": "HEAD",
       "hash": "7d9aa19c85f5d50048893d762119021e40798705"
+    },
+    "com.cynaptek.postprocesscontroller": {
+      "revision": "HEAD",
+      "hash": "596fda266f6efccd97ca8169b14cd9ac878eb920"
     }
   }
 }

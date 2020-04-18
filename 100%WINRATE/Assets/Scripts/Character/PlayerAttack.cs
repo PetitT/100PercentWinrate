@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using System;
 using System.IO;
+using DG.Tweening;
 
 public class PlayerAttack : MonoBehaviourPun
 {
@@ -13,6 +14,7 @@ public class PlayerAttack : MonoBehaviourPun
     [SerializeField] private PlayerBodySkin bodySkin;
     [SerializeField] private PlayerWeaponCollider weaponCollider;
     [SerializeField] private Animator anim;
+    [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject projectile;
 
 
@@ -131,8 +133,14 @@ public class PlayerAttack : MonoBehaviourPun
 
         photonView.RPC("ToggleAnim", RpcTarget.All, true);
         StartCoroutine("AnimCoolDown");
+        AnimateWeapon();
         remainingAttackFrequency = attackFrequency;
         canShoot = false;
+    }
+
+    private void AnimateWeapon()
+    {
+        weapon.transform.DOPunchPosition(-weapon.transform.up, attackFrequency/2.5f, 1, 0.3f);
     }
 
     [PunRPC]
