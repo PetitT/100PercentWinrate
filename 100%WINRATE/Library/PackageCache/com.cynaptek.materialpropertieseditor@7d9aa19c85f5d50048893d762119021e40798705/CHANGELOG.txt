@@ -1,3 +1,0 @@
-v 1.0.6 :
--Changed the architecture of the package to improve efficiency.
--Added the Preview Mode for editor.

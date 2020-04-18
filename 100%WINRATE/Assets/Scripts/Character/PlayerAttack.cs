@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviourPun
     [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject projectile;
 
+    public event Action<float> onShoot;
 
     private float attackFrequency;
     private float minAttackFrequency;
@@ -104,12 +105,6 @@ public class PlayerAttack : MonoBehaviourPun
         }
     }
 
-    private IEnumerator AnimCoolDown()
-    {
-        yield return new WaitForEndOfFrame();
-        photonView.RPC("ToggleAnim", RpcTarget.AllBuffered, false);
-    }
-
     private void CoolDown()
     {
         remainingAttackFrequency -= Time.deltaTime;
@@ -131,16 +126,10 @@ public class PlayerAttack : MonoBehaviourPun
             projectileColor.r, projectileColor.g, projectileColor.b, projectileColor.a
             );
 
-        photonView.RPC("ToggleAnim", RpcTarget.All, true);
-        StartCoroutine("AnimCoolDown");
-        AnimateWeapon();
+        onShoot?.Invoke(attackFrequency);
+
         remainingAttackFrequency = attackFrequency;
         canShoot = false;
-    }
-
-    private void AnimateWeapon()
-    {
-        weapon.transform.DOPunchPosition(-weapon.transform.up, attackFrequency/2.5f, 1, 0.3f);
     }
 
     [PunRPC]
@@ -151,13 +140,7 @@ public class PlayerAttack : MonoBehaviourPun
             );
 
         newProjectile.GetComponent<ProjectileOfflineBehaviour>().Initialize(
-            speed, damage, size, new Vector2(XDir, YDir), ID, new Color(R, G, B, A)
+            speed, damage, size, new Vector2(XDir, YDir), ID, new Color(R, G, B, A) * DataManager.Instance.colorIntensity
             );
-    }
-
-    [PunRPC]
-    private void ToggleAnim(bool toggle)
-    {
-        anim.SetBool("Shoot", toggle);
     }
 }

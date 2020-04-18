@@ -8,7 +8,7 @@ public class DataManager : Singleton<DataManager>
     public float baseMoveSpeed;
     public float rotationSpeed;
 
-    [Header("Projectile")]
+    [Header("Attack")]
     public float baseAttackFrequency;
     public float baseProjectileSpeed;
     public float baseProjectileSize;
@@ -49,4 +49,7 @@ public class DataManager : Singleton<DataManager>
     public float growSpeed;
     public float timeToRespawn;
     [Range(0, 100)] public float slowObstacleForce;
+    public float muzzleAnimFrequency;
+    public float colorIntensity;
+    public float lineColorBlendTime;
 }

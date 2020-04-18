@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f846dbb3e7808c4e929b12cc5574fe1, type: 3}
+  m_Name: 8
+  m_EditorClassIdentifier: 
+  muzzleFlash:
+  - {fileID: 21300000, guid: 7096ad4c7a2d2354cb36964b40914ae1, type: 3}
+  - {fileID: 21300000, guid: 1ea93da06f393374b83cace9a9f7a09b, type: 3}
+  - {fileID: 21300000, guid: 0dc574bfd4bf5e04caf04575932ba895, type: 3}
+  - {fileID: 21300000, guid: e793c392ed3f7c144a2446b717fb36cc, type: 3}

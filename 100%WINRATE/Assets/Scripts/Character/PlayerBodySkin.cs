@@ -12,8 +12,8 @@ public class PlayerBodySkin : MonoBehaviourPun
 
     private void Awake()
     {
-        playerColor = Random.ColorHSV();
-        FindObjectOfType<PlayerList>().playerColor = playerColor;
+        playerColor = Random.ColorHSV(0, 1, 1, 1, 1, 1);
+        FindObjectOfType<PlayerList>().playerColor = playerColor * DataManager.Instance.colorIntensity;
     }
 
     private void Start()
@@ -34,6 +34,6 @@ public class PlayerBodySkin : MonoBehaviourPun
     [PunRPC]
     private void SetRandomColor(int spriteIndex, float R, float G, float B, float A)
     {
-        bodySprites[spriteIndex].color = new Color(R, G, B, A);
+        bodySprites[spriteIndex].material.SetColor("Glow_Color", new Color(R, G, B, A) * DataManager.Instance.colorIntensity);
     }
 }

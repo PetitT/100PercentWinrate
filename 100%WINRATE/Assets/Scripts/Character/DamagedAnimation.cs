@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PostProcessController;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,7 @@ using UnityEngine;
 public class DamagedAnimation : MonoBehaviour
 {
     [SerializeField] private PlayerCollision collision;
-   // private PostProcessVolume ppv;
-    //private ChromaticAberration CA;
+    private ChromaticAberrationController cac;
 
     float value = 0;
     private float maxValue;
@@ -20,8 +20,7 @@ public class DamagedAnimation : MonoBehaviour
         animSpeed = DataManager.Instance.damagedAnimationSpeed;
         maxValue = DataManager.Instance.chromaticAberrationMaxValue;
         collision.onHit += OnHitHandler;
-        //ppv = Camera.main.gameObject.GetComponent<PostProcessVolume>();
-        //ppv.profile.TryGetSettings(out CA);
+        cac = FindObjectOfType<ChromaticAberrationController>();
     }
 
     private void OnDisable()
@@ -40,13 +39,13 @@ public class DamagedAnimation : MonoBehaviour
         while (value < maxValue)
         {
             value += Time.deltaTime * animSpeed;
-           // CA.intensity.value = value;
+            cac.intensity = value;
             yield return null;
         }
         while (value > 0)
         {
             value -= Time.deltaTime * animSpeedBack;
-            //CA.intensity.value = value;
+            cac.intensity = value;
             yield return null;
         }
     }

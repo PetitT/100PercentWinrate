@@ -1,6 +1,0 @@
-v1.0.1
-- Added Chromatic aberration and Bloom controllers.
-- Added ColorFadeInOut script.
-
-v1.0.2
-- Script value now take volume values on initialization.

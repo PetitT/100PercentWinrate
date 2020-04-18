@@ -67,6 +67,9 @@ MonoBehaviour:
   - Spawn
   - Explode
   - HideAvatar
+  - AnimateWeapon
+  - SetMuzzleSprite
+  - ClearMuzzleSprite
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
