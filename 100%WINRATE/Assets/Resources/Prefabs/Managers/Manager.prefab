@@ -86,31 +86,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e056c4945e60e4eaa933417397e5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 5
+  baseMoveSpeed: 5
+  rotationSpeed: 5
   baseAttackFrequency: 1
-  baseProjectileSpeed: 6
+  baseProjectileSpeed: 10
   baseProjectileSize: 0.5
   baseProjectileDamage: 1
-  minAttackFrequency: 0.25
+  minAttackFrequency: 0.2
   baseHealth: 3
-  healthRegenValue: 0.1
-  healthRegenFrequency: 1
-  minHealthRegenFrequency: 1
-  moveSpeedBuff: 0.1
+  healthRegenValue: 0.01
+  healthRegenFrequency: 0.1
+  minHealthRegenFrequency: 0.1
+  moveSpeedBuff: 0.02
   AttackFrequencyBuff: 0.015
   projectileSpeedBuff: 0.2
   projectileDamageBuff: 0.075
-  projectileSizeBuff: 0.2
+  projectileSizeBuff: 0.1
   bodySizeBuff: 0.2
   healthBuff: 1
-  healthRegenValueBuff: 0.05
+  healthRegenValueBuff: 0.002
   healthRegenFrequencyBuff: 0
   timeBetweenSpawns: 5
   numberOfLootAtStart: 20
+  chromaticAberrationMaxValue: 0.5
+  damagedAnimationSpeed: 10
+  damagedAnimationSpeedRecover: 12
   statsBuffCheat: cheat
   statsBuffAmount: 10
   growSpeed: 0.05
   timeToRespawn: 3
+  slowObstacleForce: 25
+  muzzleAnimFrequency: 0.1
+  colorIntensity: 3
+  lineColorBlendTime: 10
 --- !u!114 &390991603868786911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +166,7 @@ MonoBehaviour:
   entryParent: {fileID: 0}
   playerEntry: {fileID: 2997636565422944910, guid: 6f2959bf555a336488b0e8ac82363dc9,
     type: 3}
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &4729020526907125930
 MonoBehaviour:
   m_ObjectHideFlags: 0

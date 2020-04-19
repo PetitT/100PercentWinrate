@@ -13,7 +13,6 @@ public class PlayerAttack : MonoBehaviourPun
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerBodySkin bodySkin;
     [SerializeField] private PlayerWeaponCollider weaponCollider;
-    [SerializeField] private Animator anim;
     [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject projectile;
 

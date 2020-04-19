@@ -7,7 +7,7 @@ public class LootBehaviour : MonoBehaviourPun
 {
     private void OnEnable()
     {
-        GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+        GetComponentInChildren<SpriteRenderer>().color = Random.ColorHSV(0, 1, 1, 1, 1, 1) * 3;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviourPun
 {
-    [SerializeField] private PhotonView pv;
+    [SerializeField] private PhotonView playerPhotonView;
     public event Action<float> onHit;
     public event Action onLoot;
     public event Action<bool> onSlow;
@@ -17,7 +17,7 @@ public class PlayerCollision : MonoBehaviourPun
         {
             if (collision.CompareTag("Projectile"))
             {
-                if (collision.GetComponent<ProjectileOfflineBehaviour>().ID != pv.ViewID)
+                if (collision.GetComponent<ProjectileOfflineBehaviour>().ID != playerPhotonView.ViewID)
                 {
                     float damage = collision.GetComponent<ProjectileOfflineBehaviour>().Damage;
                     onHit?.Invoke(damage);

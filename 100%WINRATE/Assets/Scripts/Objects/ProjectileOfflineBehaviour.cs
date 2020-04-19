@@ -6,6 +6,8 @@ using UnityEngine;
 public class ProjectileOfflineBehaviour : MonoBehaviour
 {
     [SerializeField] private float lifeTime;
+    [SerializeField] private GameObject playerHitParticle;
+    [SerializeField] private GameObject obstacleHitParticle;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private TrailRenderer trail;
     private float remainingLifeTime;
@@ -48,22 +50,31 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
         remainingLifeTime -= Time.deltaTime;
         if (remainingLifeTime <= 0)
         {
-            gameObject.SetActive(false);
+            Disable(obstacleHitParticle, transform.position);
         }
+    }
+
+    private void Disable(GameObject particle, Vector3 position)
+    {
+        GameObject newParticle = Pool.instance.GetItemFromPool(particle, transform.position, Quaternion.identity);
+        newParticle.transform.localScale = transform.localScale;
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Wall"))
         {
-            gameObject.SetActive(false);
+            Vector3 collisionPoint = collision.bounds.ClosestPoint(transform.position);
+            Disable(obstacleHitParticle, collisionPoint);
         }
 
         if (collision.CompareTag("Player"))
         {
             if (collision.GetComponentInParent<PlayerAttack>().GetComponent<PhotonView>().ViewID != ID)
             {
-                gameObject.SetActive(false);
+                Vector3 collisionPoint = collision.bounds.ClosestPoint(transform.position);
+                Disable(playerHitParticle, collisionPoint);
             }
         }
     }

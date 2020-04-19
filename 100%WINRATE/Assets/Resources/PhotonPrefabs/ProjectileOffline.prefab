@@ -48,6 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 5
+  playerHitParticle: {fileID: 814520012166164126, guid: 9fc1bc713b0e4984380a008d1760dcfd,
+    type: 3}
+  obstacleHitParticle: {fileID: 6749049917071146343, guid: c158b4c764964984586a4075b62951b4,
+    type: 3}
   spriteRenderer: {fileID: 2154935540553089377}
   trail: {fileID: 1000166209522373621}
 --- !u!50 &6722760545736917151
