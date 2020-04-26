@@ -9,4 +9,5 @@ public class StringsManager : Singleton<StringsManager>
     public string projectile;
     public string loot;
     public string playerEntry;
+    public string poolParent;
 }

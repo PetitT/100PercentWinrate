@@ -14,6 +14,7 @@ public class DataManager : Singleton<DataManager>
     public float baseProjectileSize;
     public float baseProjectileDamage;
     public float minAttackFrequency;
+    public float projectileLifetime;
 
     [Header("Health")]
     public float baseHealth;
@@ -40,6 +41,12 @@ public class DataManager : Singleton<DataManager>
     [Range(0, 5)] public float chromaticAberrationMaxValue;
     public float damagedAnimationSpeed;
     public float damagedAnimationSpeedRecover;
+
+    [Header("Sounds")]
+    public AudioClip shootSound;
+    public AudioClip deathSound;
+    public AudioClip hitSound;
+    public AudioClip lootSound;
 
     [Header("Cheats")]
     public string statsBuffCheat;

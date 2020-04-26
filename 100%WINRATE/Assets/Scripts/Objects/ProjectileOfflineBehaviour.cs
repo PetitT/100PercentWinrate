@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class ProjectileOfflineBehaviour : MonoBehaviour
 {
-    [SerializeField] private float lifeTime;
     [SerializeField] private GameObject playerHitParticle;
     [SerializeField] private GameObject obstacleHitParticle;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private TrailRenderer trail;
+    private float lifeTime;
     private float remainingLifeTime;
     private float speed;
     private Vector2 rotation;
@@ -32,6 +32,11 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
         trail.material.color = projectileColor;
         trail.material.SetColor("_EmissionColor", projectileColor);
         trail.widthMultiplier = size;
+    }
+
+    private void OnEnable()
+    {
+        lifeTime = DataManager.Instance.projectileLifetime;        
     }
 
     private void Update()

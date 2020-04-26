@@ -1809,7 +1809,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &974572480
 PrefabInstance:
@@ -2224,7 +2224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1249816919
 MonoBehaviour:
@@ -3377,6 +3377,41 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: projectileSizeBuff
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: projectileLifetime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
+    - target: {fileID: 390991603868786910, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: lootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
+    - target: {fileID: 390991603868786911, guid: 3841c1d0c43347542a69f78222e20678,
+        type: 3}
+      propertyPath: poolParent
+      value: PoolParent
+      objectReference: {fileID: 0}
     - target: {fileID: 472697393291194581, guid: 3841c1d0c43347542a69f78222e20678,
         type: 3}
       propertyPath: poolParent
@@ -3500,17 +3535,17 @@ PrefabInstance:
     - target: {fileID: 4389999338301194020, guid: 6382536c3f6f4954fb0a1dea022b867b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3671343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4389999338301194020, guid: 6382536c3f6f4954fb0a1dea022b867b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.8233235
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4389999338301194020, guid: 6382536c3f6f4954fb0a1dea022b867b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2045752
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4389999338301194020, guid: 6382536c3f6f4954fb0a1dea022b867b,
         type: 3}
