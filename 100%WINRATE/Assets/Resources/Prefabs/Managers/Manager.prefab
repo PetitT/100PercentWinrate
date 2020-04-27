@@ -88,20 +88,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMoveSpeed: 5
   rotationSpeed: 5
-  baseAttackFrequency: 1
-  baseProjectileSpeed: 10
+  baseAttackFrequency: 1.25
+  baseProjectileSpeed: 15
   baseProjectileSize: 0.5
   baseProjectileDamage: 1
   minAttackFrequency: 0.2
+  projectileLifetime: 0.75
   baseHealth: 3
   healthRegenValue: 0.01
   healthRegenFrequency: 0.1
   minHealthRegenFrequency: 0.1
-  moveSpeedBuff: 0.02
-  AttackFrequencyBuff: 0.015
-  projectileSpeedBuff: 0.2
+  moveSpeedBuff: 0.01
+  AttackFrequencyBuff: -0.015
+  projectileSpeedBuff: 0.1
   projectileDamageBuff: 0.075
-  projectileSizeBuff: 0.1
+  projectileSizeBuff: 0.05
   bodySizeBuff: 0.2
   healthBuff: 1
   healthRegenValueBuff: 0.002
@@ -111,6 +112,10 @@ MonoBehaviour:
   chromaticAberrationMaxValue: 0.5
   damagedAnimationSpeed: 10
   damagedAnimationSpeedRecover: 12
+  shootSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
+  deathSound: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
+  hitSound: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+  lootSound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
   statsBuffCheat: cheat
   statsBuffAmount: 10
   growSpeed: 0.05
@@ -136,6 +141,7 @@ MonoBehaviour:
   projectile: Projectile
   loot: Loot
   playerEntry: PlayerEntry
+  poolParent: PoolParent
 --- !u!114 &139906891628190504
 MonoBehaviour:
   m_ObjectHideFlags: 0
