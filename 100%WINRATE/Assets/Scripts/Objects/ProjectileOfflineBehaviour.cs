@@ -30,8 +30,9 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
         spriteRenderer.color = projectileColor;
         trail.Clear();
         trail.material.color = projectileColor;
+        trail.material.SetColor("_Color", projectileColor);
         trail.material.SetColor("_EmissionColor", projectileColor);
-        trail.widthMultiplier = size;
+        trail.widthMultiplier = size/3;
     }
 
     private void OnEnable()

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinesColorAnimator : MonoBehaviour
+public class RandomColorGradientAnimator : MonoBehaviour
 {
     [SerializeField] private ColorGradientPropertyInfo propertyInfo;
 
