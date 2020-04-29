@@ -77,7 +77,7 @@ public class PlayerSize : MonoBehaviourPun
         if (photonView.IsMine)
         {
             targetBodyScale += stats.bodySize;
-            targetCamScale += stats.bodySize * 1.5f;
+            targetCamScale += stats.bodySize * 3f;
         }
     }
 
