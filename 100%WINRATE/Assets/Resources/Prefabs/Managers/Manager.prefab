@@ -74,6 +74,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPositions:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &390991603868786910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,23 +109,23 @@ MonoBehaviour:
   baseMoveSpeed: 5
   rotationSpeed: 5
   baseAttackFrequency: 1
-  baseProjectileSpeed: 15
+  baseProjectileSpeed: 17.5
   baseProjectileSize: 0.5
   baseProjectileDamage: 1
   minAttackFrequency: 0.5
-  projectileLifetime: 0.75
+  projectileLifetime: 1.5
   baseHealth: 3
   healthRegenValue: 0.01
   healthRegenFrequency: 0.1
   minHealthRegenFrequency: 0.1
   moveSpeedBuff: 0.01
-  AttackFrequencyBuff: 0.007
+  AttackFrequencyBuff: -0.006
   projectileSpeedBuff: 0.1
-  projectileDamageBuff: 0.2
-  projectileSizeBuff: 0.05
-  bodySizeBuff: 0.2
-  healthBuff: 1
-  healthRegenValueBuff: 0.0015
+  projectileDamageBuff: 0.1
+  projectileSizeBuff: 0.025
+  bodySizeBuff: 0.1
+  healthBuff: 0.5
+  healthRegenValueBuff: 0.0005
   healthRegenFrequencyBuff: 0
   timeBetweenSpawns: 5
   numberOfLootAtStart: 20
