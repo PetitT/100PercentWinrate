@@ -108,12 +108,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMoveSpeed: 5
   rotationSpeed: 5
-  baseAttackFrequency: 1
+  baseAttackFrequency: 0.5
   baseProjectileSpeed: 17.5
   baseProjectileSize: 0.5
   baseProjectileDamage: 1
   minAttackFrequency: 0.5
   projectileLifetime: 1.5
+  projectileParticleScale: 2.5
   baseHealth: 3
   healthRegenValue: 0.01
   healthRegenFrequency: 0.1

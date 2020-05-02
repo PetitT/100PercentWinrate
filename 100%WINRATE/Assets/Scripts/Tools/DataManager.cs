@@ -15,6 +15,7 @@ public class DataManager : Singleton<DataManager>
     public float baseProjectileDamage;
     public float minAttackFrequency;
     public float projectileLifetime;
+    public float projectileParticleScale;
 
     [Header("Health")]
     public float baseHealth;

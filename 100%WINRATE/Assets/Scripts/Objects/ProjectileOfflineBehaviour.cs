@@ -9,6 +9,7 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
     [SerializeField] private GameObject obstacleHitParticle;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private TrailRenderer trail;
+    private float projectileHitParticleScale;
     private float lifeTime;
     private float remainingLifeTime;
     private float speed;
@@ -37,7 +38,8 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
-        lifeTime = DataManager.Instance.projectileLifetime;        
+        lifeTime = DataManager.Instance.projectileLifetime;
+        projectileHitParticleScale = DataManager.Instance.projectileParticleScale;
     }
 
     private void Update()
@@ -63,7 +65,7 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
     private void Disable(GameObject particle, Vector3 position)
     {
         GameObject newParticle = Pool.instance.GetItemFromPool(particle, transform.position, Quaternion.identity);
-        newParticle.transform.localScale = transform.localScale;
+        newParticle.transform.localScale = transform.localScale * projectileHitParticleScale;
         gameObject.SetActive(false);
     }
 

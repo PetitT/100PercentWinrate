@@ -20,7 +20,7 @@ public class PlayerInfo : PunSingleton<PlayerInfo>
         }
         else
         {
-            name = Helper.GetRandomInList(randomNames);
+            name = Helper.GetRandomInCollection(randomNames);
         }
         PhotonNetwork.LocalPlayer.NickName = name;
     }
