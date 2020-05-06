@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4d2f6648b6d414cbae414810487c9a, type: 3}
   m_Name: StatInfos
   m_EditorClassIdentifier: 
-  baseDamage: 1
-  damageBuff: 0.2
-  baseAttackSpeed: 1
-  attackSpeedBuff: -0.007
-  minAttackSpeed: 0.5
+  baseDamage: 0.75
+  damageBuff: 0.1
+  baseAttackSpeed: 0.5
+  attackSpeedBuff: 0.0065
+  minAttackSpeed: 1.3
   baseHealth: 3
-  healthBuff: 1
+  healthBuff: 0.75
   baseHealthRegenPerSec: 0.1
   healthRegenPerSecBuff: 0.015

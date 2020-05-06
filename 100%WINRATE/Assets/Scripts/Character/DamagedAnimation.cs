@@ -9,16 +9,22 @@ public class DamagedAnimation : MonoBehaviour
     [SerializeField] private PlayerCollision collision;
     private ChromaticAberrationController cac;
 
-    float value = 0;
-    private float maxValue;
+    private float chromaticAberrationValue = 0;
+    private float chromaticAberrationMaxValue;
     private float animSpeed;
     private float animSpeedBack;
+
+    private float audioPitchValue = 1;
+    private float audioPitchChangeSpeed;
+    private float audioPitchMinValue;
 
     private void Start()
     {
         animSpeedBack = DataManager.Instance.damagedAnimationSpeedRecover;
         animSpeed = DataManager.Instance.damagedAnimationSpeed;
-        maxValue = DataManager.Instance.chromaticAberrationMaxValue;
+        chromaticAberrationMaxValue = DataManager.Instance.chromaticAberrationMaxValue;
+        audioPitchChangeSpeed = DataManager.Instance.audioPitchChangeSpeed;
+        audioPitchMinValue = DataManager.Instance.audioPitchMinValue;
         collision.onHit += OnHitHandler;
         cac = FindObjectOfType<ChromaticAberrationController>();
     }
@@ -32,21 +38,40 @@ public class DamagedAnimation : MonoBehaviour
     {
         StopCoroutine(AnimateHit());
         StartCoroutine(AnimateHit());
+        StopCoroutine(HitSound());
+        StartCoroutine(HitSound());
     }
 
     private IEnumerator AnimateHit()
     {
-        while (value < maxValue)
+        while (chromaticAberrationValue < chromaticAberrationMaxValue)
         {
-            value += Time.deltaTime * animSpeed;
-            cac.intensity = value;
+            chromaticAberrationValue += Time.deltaTime * animSpeed;
+            cac.intensity = chromaticAberrationValue;
             yield return null;
         }
-        while (value > 0)
+        while (chromaticAberrationValue > 0)
         {
-            value -= Time.deltaTime * animSpeedBack;
-            cac.intensity = value;
+            chromaticAberrationValue -= Time.deltaTime * animSpeedBack;
+            cac.intensity = chromaticAberrationValue;
             yield return null;
         }
+    }
+
+    private IEnumerator HitSound()
+    {
+        while(audioPitchValue > audioPitchMinValue)
+        {
+            audioPitchValue -= Time.deltaTime * audioPitchChangeSpeed;
+            MusicManager.Instance.AudioSource.pitch = audioPitchValue;
+            yield return null;
+        }
+        while(audioPitchValue < 1)
+        {
+            audioPitchValue += Time.deltaTime * audioPitchChangeSpeed;
+            MusicManager.Instance.AudioSource.pitch = audioPitchValue;
+            yield return null;
+        }
+        MusicManager.Instance.AudioSource.pitch = 1;
     }
 }

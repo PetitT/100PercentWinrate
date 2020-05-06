@@ -168,6 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4399a1817412ff4191d90818603412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attack: {fileID: 2902924391214374873}
+  movement: {fileID: -7369201830887332771}
   health: {fileID: 203878791224238543}
   score: {fileID: 6908290587542486622}
   avatar: {fileID: 9111023291045335213}
@@ -1778,7 +1780,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0

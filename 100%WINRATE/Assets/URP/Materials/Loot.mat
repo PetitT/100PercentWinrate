@@ -20,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Emission:
         m_Texture: {fileID: 2800000, guid: f743ae65363a58b4bb63d471b4978b1a, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -28,6 +32,11 @@ Material:
         m_Texture: {fileID: 2800000, guid: 8a15252bb01cb634db44c312eb3344a0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
     m_Colors:
     - Glow_Color: {r: 1.8502672, g: 0, b: 1.9999998, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

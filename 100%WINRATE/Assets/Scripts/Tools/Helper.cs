@@ -24,6 +24,10 @@ public static class Helper
         return item;
     }
 
+    /// <summary>
+    /// Returns a random boolean
+    /// </summary>
+    /// <returns></returns>
     public static bool GetRandomBool()
     {
         int random = Random.Range(0, 1);

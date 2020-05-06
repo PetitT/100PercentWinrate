@@ -75,9 +75,9 @@ public class PlayerAttack : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            if (attackFrequency >= minAttackFrequency)
+            if (attackFrequency <= minAttackFrequency)
             {
-                attackFrequency -= stats.attackFrequency;
+                attackFrequency += stats.attackFrequency;
             }
             projectileSpeed += stats.projectileSpeed;
             projectileDamage += stats.projectileDamage;

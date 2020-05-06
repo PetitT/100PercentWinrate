@@ -111,8 +111,8 @@ MonoBehaviour:
   baseAttackFrequency: 0.5
   baseProjectileSpeed: 17.5
   baseProjectileSize: 0.5
-  baseProjectileDamage: 1
-  minAttackFrequency: 0.5
+  baseProjectileDamage: 0.75
+  minAttackFrequency: 1.3
   projectileLifetime: 1.5
   projectileParticleScale: 2.5
   baseHealth: 3
@@ -120,19 +120,21 @@ MonoBehaviour:
   healthRegenFrequency: 0.1
   minHealthRegenFrequency: 0.1
   moveSpeedBuff: 0.01
-  AttackFrequencyBuff: -0.006
+  AttackFrequencyBuff: 0.0065
   projectileSpeedBuff: 0.1
   projectileDamageBuff: 0.1
   projectileSizeBuff: 0.025
   bodySizeBuff: 0.1
-  healthBuff: 0.5
+  healthBuff: 0.75
   healthRegenValueBuff: 0.0005
   healthRegenFrequencyBuff: 0
   timeBetweenSpawns: 5
   numberOfLootAtStart: 20
   chromaticAberrationMaxValue: 0.5
-  damagedAnimationSpeed: 10
-  damagedAnimationSpeedRecover: 12
+  damagedAnimationSpeed: 5
+  damagedAnimationSpeedRecover: 7
+  audioPitchChangeSpeed: 2
+  audioPitchMinValue: 0.7
   shootSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
   deathSound: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
   hitSound: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
@@ -141,10 +143,12 @@ MonoBehaviour:
   statsBuffAmount: 10
   growSpeed: 0.05
   timeToRespawn: 3
+  explosionScaleFactor: 1.2
   slowObstacleForce: 25
   muzzleAnimFrequency: 0.1
   colorIntensity: 3
   lineColorBlendTime: 10
+  highPassCutoffOnDeath: 2500
 --- !u!114 &390991603868786911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +167,7 @@ MonoBehaviour:
   loot: Loot
   playerEntry: PlayerEntry
   poolParent: PoolParent
+  musicGameobject: Music
 --- !u!114 &139906891628190504
 MonoBehaviour:
   m_ObjectHideFlags: 0

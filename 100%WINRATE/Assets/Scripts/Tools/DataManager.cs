@@ -42,6 +42,8 @@ public class DataManager : Singleton<DataManager>
     [Range(0, 5)] public float chromaticAberrationMaxValue;
     public float damagedAnimationSpeed;
     public float damagedAnimationSpeedRecover;
+    public float audioPitchChangeSpeed;
+    public float audioPitchMinValue;
 
     [Header("Sounds")]
     public AudioClip shootSound;
@@ -56,8 +58,10 @@ public class DataManager : Singleton<DataManager>
     [Header("Other")]
     public float growSpeed;
     public float timeToRespawn;
+    public float explosionScaleFactor;
     [Range(0, 100)] public float slowObstacleForce;
     public float muzzleAnimFrequency;
     public float colorIntensity;
     public float lineColorBlendTime;
+    public float highPassCutoffOnDeath;
 }

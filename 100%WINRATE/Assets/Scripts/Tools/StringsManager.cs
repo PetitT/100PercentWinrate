@@ -10,4 +10,5 @@ public class StringsManager : Singleton<StringsManager>
     public string loot;
     public string playerEntry;
     public string poolParent;
+    public string musicGameobject;
 }

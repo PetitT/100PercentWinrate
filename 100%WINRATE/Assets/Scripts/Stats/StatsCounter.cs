@@ -23,7 +23,7 @@ public class StatsCounter : MonoBehaviour
             {
                 damage += stats.damageBuff;
                 attackSpeed += stats.attackSpeedBuff;
-                if(attackSpeed <= stats.minAttackSpeed)
+                if(attackSpeed >= stats.minAttackSpeed)
                 {
                     attackSpeed = stats.minAttackSpeed;
                 }
@@ -50,7 +50,7 @@ public class StatsCounter : MonoBehaviour
 
     private float GetDPS(float damage, float attackSpeed)
     {
-        float dps = damage * attackSpeed;
+        float dps = damage / attackSpeed;
         return dps;
     }
 }

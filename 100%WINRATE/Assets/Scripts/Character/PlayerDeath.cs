@@ -7,17 +7,23 @@ using System.IO;
 
 public class PlayerDeath : MonoBehaviourPun
 {
+    [SerializeField] private PlayerAttack attack;
+    [SerializeField] private PlayerMovement movement;
     [SerializeField] private PlayerHealth health;
     [SerializeField] private PlayerScore score;
     [SerializeField] private GameObject avatar;
     [SerializeField] private GameObject loot;
     [SerializeField] private GameObject explosion;
+    private float cutoffFrequencyOnDeath;
+    private float explosionScaleFactor;
 
     private void Start()
     {
         if (photonView.IsMine)
         {
             health.onDeath += OnDeathHandler;
+            cutoffFrequencyOnDeath = DataManager.Instance.highPassCutoffOnDeath;
+            explosionScaleFactor = DataManager.Instance.explosionScaleFactor;
         }
     }
 
@@ -29,18 +35,13 @@ public class PlayerDeath : MonoBehaviourPun
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            OnDeathHandler();
-        }
-    }
-
     private void OnDeathHandler()
     {
         if (photonView.IsMine)
         {
+            attack.enabled = false;
+            movement.enabled = false;
+            MusicManager.Instance.HighPassFilter.cutoffFrequency = cutoffFrequencyOnDeath;
             photonView.RPC("Explode", RpcTarget.All, avatar.GetComponent<PhotonView>().ViewID, score.Score);
             photonView.RPC("SpawnLoot", RpcTarget.AllBuffered, score.Score, avatar.GetComponent<PhotonView>().ViewID);
             photonView.RPC("HideAvatar", RpcTarget.All, avatar.GetComponent<PhotonView>().ViewID);
@@ -52,6 +53,9 @@ public class PlayerDeath : MonoBehaviourPun
     {
         yield return new WaitForSeconds(DataManager.Instance.timeToRespawn);
         photonView.RPC("Respawn", RpcTarget.AllBuffered, avatar.GetComponent<PhotonView>().ViewID);
+        attack.enabled = true;
+        movement.enabled = true;
+        MusicManager.Instance.HighPassFilter.cutoffFrequency = 10;
     }
 
     [PunRPC]
@@ -64,7 +68,7 @@ public class PlayerDeath : MonoBehaviourPun
         {
             score = 1;
         }
-        newExplosion.transform.localScale = new Vector2(score * DataManager.Instance.bodySizeBuff, score * DataManager.Instance.bodySizeBuff);
+        newExplosion.transform.localScale = new Vector2(score * DataManager.Instance.bodySizeBuff, score * DataManager.Instance.bodySizeBuff) * explosionScaleFactor;
     }
 
     [PunRPC]
@@ -77,8 +81,6 @@ public class PlayerDeath : MonoBehaviourPun
         }
         float sizeBuff = DataManager.Instance.bodySizeBuff;
 
-        Debug.Log("score = " + score);
-        Debug.Log("numberOfBalls = " + numberOfBalls);
         GameObject player = PhotonView.Find(playerID).gameObject;
         for (int i = 0; i < numberOfBalls; i++)
         {
