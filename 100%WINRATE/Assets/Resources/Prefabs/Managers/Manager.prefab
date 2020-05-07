@@ -116,7 +116,7 @@ MonoBehaviour:
   projectileLifetime: 1.5
   projectileParticleScale: 2.5
   baseHealth: 3
-  healthRegenValue: 0.01
+  healthRegenValue: 0.002
   healthRegenFrequency: 0.1
   minHealthRegenFrequency: 0.1
   moveSpeedBuff: 0.01
@@ -126,7 +126,7 @@ MonoBehaviour:
   projectileSizeBuff: 0.025
   bodySizeBuff: 0.1
   healthBuff: 0.75
-  healthRegenValueBuff: 0.0005
+  healthRegenValueBuff: 0
   healthRegenFrequencyBuff: 0
   timeBetweenSpawns: 5
   numberOfLootAtStart: 20
@@ -143,6 +143,7 @@ MonoBehaviour:
   statsBuffAmount: 10
   growSpeed: 0.05
   timeToRespawn: 3
+  lootSpawnMultiplicatorOnDeath: 0.33
   explosionScaleFactor: 1.2
   slowObstacleForce: 25
   muzzleAnimFrequency: 0.1

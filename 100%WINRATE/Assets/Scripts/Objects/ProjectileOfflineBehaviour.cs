@@ -33,7 +33,7 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
         trail.material.color = projectileColor;
         trail.material.SetColor("_Color", projectileColor);
         trail.material.SetColor("_EmissionColor", projectileColor);
-        trail.widthMultiplier = size/3;
+        trail.widthMultiplier = size / 3;
     }
 
     private void OnEnable()
@@ -58,15 +58,14 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
         remainingLifeTime -= Time.deltaTime;
         if (remainingLifeTime <= 0)
         {
-            Disable(obstacleHitParticle, transform.position);
+            gameObject.SetActive(false);
         }
     }
 
-    private void Disable(GameObject particle, Vector3 position)
+    private void SpawnParticle(GameObject particle, Vector3 position)
     {
         GameObject newParticle = Pool.instance.GetItemFromPool(particle, transform.position, Quaternion.identity);
         newParticle.transform.localScale = transform.localScale * projectileHitParticleScale;
-        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,7 +73,8 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
         if (collision.CompareTag("Wall"))
         {
             Vector3 collisionPoint = collision.bounds.ClosestPoint(transform.position);
-            Disable(obstacleHitParticle, collisionPoint);
+            SpawnParticle(obstacleHitParticle, collisionPoint);
+            gameObject.SetActive(false);
         }
 
         if (collision.CompareTag("Player"))
@@ -82,7 +82,8 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
             if (collision.GetComponentInParent<PlayerAttack>().GetComponent<PhotonView>().ViewID != ID)
             {
                 Vector3 collisionPoint = collision.bounds.ClosestPoint(transform.position);
-                Disable(playerHitParticle, collisionPoint);
+                SpawnParticle(playerHitParticle, collisionPoint);
+                gameObject.SetActive(false);
             }
         }
     }

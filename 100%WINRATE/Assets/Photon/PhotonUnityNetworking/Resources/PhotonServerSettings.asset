@@ -74,6 +74,8 @@ MonoBehaviour:
   - PlayDeathSound
   - PlayShootSound
   - PlayHitSound
+  - FakeShoot
+  - Oui
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

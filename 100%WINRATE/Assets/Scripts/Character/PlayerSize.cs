@@ -51,7 +51,7 @@ public class PlayerSize : MonoBehaviourPun
         if (photonView.IsMine)
         {
             statsSetter.onStatsChange -= OnStatsChangeHandler;
-            playerHealth.onDeath += OnDeathHandler;
+            playerHealth.onDeath -= OnDeathHandler;
         }
     }
 

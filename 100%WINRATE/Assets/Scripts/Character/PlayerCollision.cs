@@ -21,7 +21,6 @@ public class PlayerCollision : MonoBehaviourPun
                 {
                     float damage = collision.GetComponent<ProjectileOfflineBehaviour>().Damage;
                     onHit?.Invoke(damage);
-                    Debug.Log("Hit for " + damage);
                 }
             }
 

@@ -22,7 +22,6 @@ public class PlayerScore : MonoBehaviourPun
     {
         statsSetter.onStatsChange -= OnStatsChangeHandler;
         playerHealth.onDeath += OnDeathHandler;
-
     }
 
     private void OnDeathHandler()

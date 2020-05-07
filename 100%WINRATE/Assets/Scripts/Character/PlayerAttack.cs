@@ -54,7 +54,7 @@ public class PlayerAttack : MonoBehaviourPun
         remainingAttackFrequency = attackFrequency;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (photonView.IsMine)
         {

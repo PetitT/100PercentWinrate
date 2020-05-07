@@ -5,10 +5,9 @@ using UnityEngine;
 public class EnableSoundPlayer : MonoBehaviour
 {
     [SerializeField] private AudioSource source;
-    [SerializeField] private AudioClip sound;
 
     private void OnEnable()
     {
-        source.PlayOneShot(sound);
+        source.PlayOneShot(source.clip);
     }
 }

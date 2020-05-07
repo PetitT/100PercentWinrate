@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviourPun
     }
 
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (photonView.IsMine)
         {

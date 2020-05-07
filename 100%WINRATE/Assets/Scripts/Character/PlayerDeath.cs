@@ -16,6 +16,8 @@ public class PlayerDeath : MonoBehaviourPun
     [SerializeField] private GameObject explosion;
     private float cutoffFrequencyOnDeath;
     private float explosionScaleFactor;
+    private float lootSpawnMultiplicatorOnDeath;
+    private float bodySizeBuff;
 
     private void Start()
     {
@@ -24,6 +26,8 @@ public class PlayerDeath : MonoBehaviourPun
             health.onDeath += OnDeathHandler;
             cutoffFrequencyOnDeath = DataManager.Instance.highPassCutoffOnDeath;
             explosionScaleFactor = DataManager.Instance.explosionScaleFactor;
+            lootSpawnMultiplicatorOnDeath = DataManager.Instance.lootSpawnMultiplicatorOnDeath;
+            bodySizeBuff = DataManager.Instance.bodySizeBuff;
         }
     }
 
@@ -42,11 +46,29 @@ public class PlayerDeath : MonoBehaviourPun
             attack.enabled = false;
             movement.enabled = false;
             MusicManager.Instance.HighPassFilter.cutoffFrequency = cutoffFrequencyOnDeath;
-            photonView.RPC("Explode", RpcTarget.All, avatar.GetComponent<PhotonView>().ViewID, score.Score);
-            photonView.RPC("SpawnLoot", RpcTarget.AllBuffered, score.Score, avatar.GetComponent<PhotonView>().ViewID);
+            int currentScore = score.Score;
+            photonView.RPC("Explode", RpcTarget.All, avatar.GetComponent<PhotonView>().ViewID, currentScore);
+            SetupSpawns(currentScore);
             photonView.RPC("HideAvatar", RpcTarget.All, avatar.GetComponent<PhotonView>().ViewID);
             StartCoroutine(RespawnTimer());
         }
+    }
+
+    private void SetupSpawns(int currentScore)
+    {
+        int numberOfBalls = (int)(currentScore * lootSpawnMultiplicatorOnDeath);
+        if (numberOfBalls < 1)
+        {
+            numberOfBalls = 1;
+        }
+
+        for (int i = 0; i < numberOfBalls; i++)
+        {
+            float X = UnityEngine.Random.Range(bodySizeBuff * -currentScore, bodySizeBuff * currentScore);
+            float Y = UnityEngine.Random.Range(bodySizeBuff * -currentScore, bodySizeBuff * currentScore);
+            photonView.RPC("SpawnLoot", RpcTarget.AllBuffered, avatar.GetComponent<PhotonView>().ViewID, X, Y);
+        }
+
     }
 
     private IEnumerator RespawnTimer()
@@ -68,29 +90,20 @@ public class PlayerDeath : MonoBehaviourPun
         {
             score = 1;
         }
-        newExplosion.transform.localScale = new Vector2(score * DataManager.Instance.bodySizeBuff, score * DataManager.Instance.bodySizeBuff) * explosionScaleFactor;
+        newExplosion.transform.localScale = new Vector2(score * bodySizeBuff, score * bodySizeBuff) * explosionScaleFactor;
     }
 
     [PunRPC]
-    private void SpawnLoot(int score, int playerID)
+    private void SpawnLoot(int playerID, float X, float Y)
     {
-        int numberOfBalls = (score / 2);
-        if (numberOfBalls < 1)
-        {
-            numberOfBalls = 1;
-        }
-        float sizeBuff = DataManager.Instance.bodySizeBuff;
-
         GameObject player = PhotonView.Find(playerID).gameObject;
-        for (int i = 0; i < numberOfBalls; i++)
-        {
-            Pool.instance.GetItemFromPool(
-            loot,
-                new Vector2
-                (player.transform.position.x + UnityEngine.Random.Range(sizeBuff * -score, sizeBuff * score),
-                player.transform.position.y + UnityEngine.Random.Range(sizeBuff * -score, sizeBuff * score)),
-                Quaternion.identity);
-        }
+
+        Pool.instance.GetItemFromPool(
+        loot,
+            new Vector2
+            (player.transform.position.x + X,
+            player.transform.position.y + Y),
+            Quaternion.identity);
     }
 
     [PunRPC]

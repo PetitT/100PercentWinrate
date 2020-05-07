@@ -58,6 +58,7 @@ public class DataManager : Singleton<DataManager>
     [Header("Other")]
     public float growSpeed;
     public float timeToRespawn;
+    public float lootSpawnMultiplicatorOnDeath;
     public float explosionScaleFactor;
     [Range(0, 100)] public float slowObstacleForce;
     public float muzzleAnimFrequency;
