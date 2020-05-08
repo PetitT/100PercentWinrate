@@ -1,2 +1,2 @@
-Name:baseMoveSpeed|Value:3;
-Name:rotationSpeed|Value:3.55;
+Name:baseMoveSpeed|Value:5;
+Name:rotationSpeed|Value:5;
