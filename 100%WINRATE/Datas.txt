@@ -1,2 +1,9 @@
 Name:baseMoveSpeed|Value:5;
 Name:rotationSpeed|Value:5;
+Name:baseAttackFrequency|Value:0,5;
+Name:baseProjectileSpeed|Value:17,5;
+Name:baseProjectileSize|Value:0,5;
+Name:baseProjectileDamage|Value:0,75;
+Name:minAttackFrequency|Value:1.3;
+Name:projectileLifetime|Value:1.5;
+Name:projectileParticleScale|Value:2,5;
