@@ -12,7 +12,7 @@ Name:healthRegenValue|Value:0.0015;
 Name:healthRegenFrequency|Value:0.1;
 Name:minHealthRegenFrequency|Value:0.1;
 Name:moveSpeedBuff|Value:0.0005;
-Name:attackFrequencyBuff|Value:-0.007;
+Name:attackFrequencyBuff|Value:0.007;
 Name:projectileSpeedBuff|Value:0.05;
 Name:projectileDamageBuff|Value:0.05;
 Name:projectileSizeBuff|Value:0.0125;
