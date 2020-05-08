@@ -15,13 +15,11 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        Debug.Log("Tried to Connect");
         PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Player Connected");
         PhotonNetwork.AutomaticallySyncScene = true;
         connectingImage.SetActive(false);
         startButton.gameObject.SetActive(true);
@@ -35,19 +33,16 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        Debug.Log("Attempt to Join Room");
         PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("No existing room");
         CreateRoom();
     }
 
     private void CreateRoom()
     {
-        Debug.Log("Creating room");
         int random = Random.Range(0, 10000);
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)maxPlayers, CleanupCacheOnLeave = true };
         PhotonNetwork.CreateRoom("Room " + random, roomOps);

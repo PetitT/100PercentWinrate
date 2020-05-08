@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollision: {fileID: 8180743648168887185}
+  cheat: {fileID: -2354016471467561781}
 --- !u!114 &203878791224238543
 MonoBehaviour:
   m_ObjectHideFlags: 0

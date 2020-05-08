@@ -7,6 +7,7 @@ using Photon.Pun;
 public class PlayerStatsSetter : MonoBehaviourPun
 {
     [SerializeField] private PlayerCollision playerCollision;
+    [SerializeField] private PlayerBuffCheat cheat;
     private Stats currentStats;
     public event Action<Stats> onStatsChange;
 
@@ -15,6 +16,7 @@ public class PlayerStatsSetter : MonoBehaviourPun
         if (photonView.IsMine)
         {
             playerCollision.onLoot += OnLootHandler;
+            cheat.onCheat += OnLootHandler;
         }
     }
 
@@ -23,6 +25,7 @@ public class PlayerStatsSetter : MonoBehaviourPun
         if (photonView.IsMine)
         {
             playerCollision.onLoot -= OnLootHandler;
+            cheat.onCheat -= OnLootHandler;
         }
     }
 
@@ -33,7 +36,7 @@ public class PlayerStatsSetter : MonoBehaviourPun
             onStatsChange?.Invoke(new Stats()
             {
                 movementSpeed = DataManager.Instance.moveSpeedBuff,
-                attackFrequency = DataManager.Instance.AttackFrequencyBuff,
+                attackFrequency = DataManager.Instance.attackFrequencyBuff,
                 bodySize = DataManager.Instance.bodySizeBuff,
                 projectileDamage = DataManager.Instance.projectileDamageBuff,
                 projectileSpeed = DataManager.Instance.projectileSpeedBuff,

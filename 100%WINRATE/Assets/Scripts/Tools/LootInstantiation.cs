@@ -17,7 +17,7 @@ public class LootInstantiation : MonoBehaviourPun
     {
         timeBetweenSpawns = DataManager.Instance.timeBetweenSpawns;
         remainingTimeToSpawn = timeBetweenSpawns;
-        spawnsAtStart = DataManager.Instance.numberOfLootAtStart;
+        spawnsAtStart = (int)DataManager.Instance.numberOfLootAtStart;
 
         for (int i = 0; i < spawnsAtStart; i++)
         {

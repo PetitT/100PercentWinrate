@@ -25,7 +25,7 @@ public class DataManager : Singleton<DataManager>
 
     [Header("Buffs")]
     public float moveSpeedBuff;
-    public float AttackFrequencyBuff;
+    public float attackFrequencyBuff;
     public float projectileSpeedBuff;
     public float projectileDamageBuff;
     public float projectileSizeBuff;
@@ -36,7 +36,7 @@ public class DataManager : Singleton<DataManager>
 
     [Header("LootSpawn")]
     public float timeBetweenSpawns;
-    public int numberOfLootAtStart;
+    public float numberOfLootAtStart;
 
     [Header("DamagedAnimation")]
     [Range(0, 5)] public float chromaticAberrationMaxValue;

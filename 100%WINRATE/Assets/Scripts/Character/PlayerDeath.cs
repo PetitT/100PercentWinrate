@@ -47,7 +47,7 @@ public class PlayerDeath : MonoBehaviourPun
             movement.enabled = false;
             MusicManager.Instance.HighPassFilter.cutoffFrequency = cutoffFrequencyOnDeath;
             int currentScore = score.Score;
-            photonView.RPC("Explode", RpcTarget.All, avatar.GetComponent<PhotonView>().ViewID, currentScore);
+            photonView.RPC("Explode", RpcTarget.All, avatar.GetComponent<PhotonView>().ViewID, currentScore, explosionScaleFactor, bodySizeBuff);
             SetupSpawns(currentScore);
             photonView.RPC("HideAvatar", RpcTarget.All, avatar.GetComponent<PhotonView>().ViewID);
             StartCoroutine(RespawnTimer());
@@ -81,7 +81,7 @@ public class PlayerDeath : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void Explode(int playerID, int score)
+    private void Explode(int playerID, int score, float scaleFactor, float sizeBuff)
     {
         Vector2 pos = PhotonView.Find(playerID).gameObject.transform.position;
         GameObject newExplosion = Pool.instance.GetItemFromPool(explosion, pos, Quaternion.identity);
@@ -90,7 +90,7 @@ public class PlayerDeath : MonoBehaviourPun
         {
             score = 1;
         }
-        newExplosion.transform.localScale = new Vector2(score * bodySizeBuff, score * bodySizeBuff) * explosionScaleFactor;
+        newExplosion.transform.localScale = new Vector2(score, score) * scaleFactor;
     }
 
     [PunRPC]
