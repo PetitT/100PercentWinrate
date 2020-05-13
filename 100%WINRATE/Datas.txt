@@ -1,4 +1,5 @@
 Name:baseMoveSpeed|Value:5;
+Name:minimumMoveSpeed|Value:3;
 Name:rotationSpeed|Value:5;
 Name:baseAttackFrequency|Value:0.35;
 Name:baseProjectileSpeed|Value:17.5;
