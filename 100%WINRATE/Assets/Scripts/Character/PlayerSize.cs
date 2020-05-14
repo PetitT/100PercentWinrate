@@ -9,6 +9,7 @@ public class PlayerSize : MonoBehaviourPun
     [SerializeField] private PlayerStatsSetter statsSetter;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private GameObject avatar;
+    [SerializeField] private List<TrailRenderer> trails;
     private Camera cam;
     private float baseCamSize;
     private float baseBodySize;
@@ -26,14 +27,13 @@ public class PlayerSize : MonoBehaviourPun
         {
             statsSetter.onStatsChange += OnStatsChangeHandler;
             playerHealth.onDeath += OnDeathHandler;
+            cam = Camera.main;
+            targetCamScale = cam.orthographicSize;
+            baseCamSize = cam.orthographicSize;
+            baseBodySize = avatar.transform.localScale.x;
+            targetBodyScale = avatar.transform.localScale.x;
+            baseGrowSpeed = DataManager.Instance.growSpeed;
         }
-
-        cam = Camera.main;
-        targetCamScale = cam.orthographicSize;
-        baseCamSize = cam.orthographicSize;
-        baseBodySize = avatar.transform.localScale.x;
-        targetBodyScale = avatar.transform.localScale.x;
-        baseGrowSpeed = DataManager.Instance.growSpeed;
     }
 
     private void Update()
@@ -78,6 +78,7 @@ public class PlayerSize : MonoBehaviourPun
         {
             targetBodyScale += stats.bodySize;
             targetCamScale += stats.bodySize * 3f;
+            photonView.RPC("ResizeTrail", RpcTarget.AllBuffered, targetBodyScale);
         }
     }
 
@@ -104,6 +105,15 @@ public class PlayerSize : MonoBehaviourPun
     {
         float statsToGrow = (targetBodyScale - avatar.transform.localScale.x) / DataManager.Instance.bodySizeBuff;
         growSpeed = baseGrowSpeed * statsToGrow / 2;
+    }
+
+    [PunRPC]
+    private void ResizeTrail(float size)
+    {
+        foreach (var trail in trails)
+        {
+            trail.widthMultiplier = size/5;
+        }
     }
 
 }

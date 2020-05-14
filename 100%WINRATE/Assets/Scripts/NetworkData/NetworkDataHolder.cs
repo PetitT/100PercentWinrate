@@ -14,8 +14,8 @@ public class NetworkDataHolder : MonoBehaviour
 
     private void Start()
     {
+        dataManager = DataManager.Instance;
         dataFetcher = GetComponent<NetworkDataFetcher>();
-        dataManager = FindObjectOfType<DataManager>();
         dataFetcher.onFetchedData += OnFetchedDataHandler;
     }
 
@@ -34,7 +34,6 @@ public class NetworkDataHolder : MonoBehaviour
         {
             FieldInfo fieldToChange = fieldInfos.Where(field => field.Name == GetDataName(dataString[i])).FirstOrDefault();
             fieldToChange.SetValue(dataManager, GetDataValue(dataString[i]));
-            Debug.Log(fieldToChange.Name + " : " + fieldToChange.GetValue(dataManager));
         }
     }
 

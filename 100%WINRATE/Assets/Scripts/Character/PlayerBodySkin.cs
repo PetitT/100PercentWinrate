@@ -7,6 +7,7 @@ public class PlayerBodySkin : MonoBehaviourPun
 {
     [SerializeField] private SpriteRenderer tankDown;
     [SerializeField] private SpriteRenderer tankUp;
+    [SerializeField] private List<TrailRenderer> trails;
     private Color playerColor;
 
     public Color PlayerColor { get => playerColor; private set => playerColor = value; }
@@ -35,5 +36,11 @@ public class PlayerBodySkin : MonoBehaviourPun
         Color newColor = new Color(R, G, B, A) * DataManager.Instance.colorIntensity;
         tankDown.material.SetColor("Glow_Color", newColor);
         tankUp.color = newColor;
+
+        foreach (var trail in trails)
+        {
+            Gradient gradient = Helper.Get2KeysGradient(newColor, newColor, 1, 0);
+            trail.colorGradient = gradient;
+        }
     }
 }

@@ -12523,6 +12523,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6382536c3f6f4954fb0a1dea022b867b, type: 3}
+--- !u!1 &4389999338081083361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4389999338631523845, guid: 6382536c3f6f4954fb0a1dea022b867b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4389999338081083360}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4389999338081083362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4389999338081083361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d22c418bbe14fa4896b9da5052fbbb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 4389999338081083363}
+  fadeInOnStart: 1
+  yieldTimeBeforeFadeIn: 0
+  fadeInSpeed: 1
+  fadeInColor: {r: 0, g: 0, b: 0, a: 0}
+  fadeOutSpeed: 0
+  fadeOutColor: {r: 0, g: 0, b: 0, a: 0}
+  onFadeInCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4389999338081083363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4389999338081083361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543878eb2b9b2c14188b6fbbb9681363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessVolume: {fileID: 974080039}
+  postExposure: 0
+  contrast: 0
+  colorFilter: {r: 1, g: 1, b: 1, a: 1}
+  hueShift: 0
+  saturation: 0
 --- !u!1001 &6597951832353143348
 PrefabInstance:
   m_ObjectHideFlags: 0

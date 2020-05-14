@@ -6,6 +6,7 @@ public class DataManager : Singleton<DataManager>
 {
     [Header("Movement")]
     public float baseMoveSpeed;
+    public float minimumMoveSpeed;
     public float rotationSpeed;
 
     [Header("Attack")]

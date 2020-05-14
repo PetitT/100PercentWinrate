@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class RoomController : MonoBehaviourPunCallbacks
 {
     [SerializeField] private string GameSceneName;
+    public UnityEvent onJoinedRoom;
 
     public override void OnEnable()
     {
@@ -21,10 +23,10 @@ public class RoomController : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined Room");
-        StartGame();
+        onJoinedRoom?.Invoke();
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         if (PhotonNetwork.IsMasterClient)
         {

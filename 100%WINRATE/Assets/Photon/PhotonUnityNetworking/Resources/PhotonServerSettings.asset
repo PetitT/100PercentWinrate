@@ -76,6 +76,7 @@ MonoBehaviour:
   - PlayHitSound
   - FakeShoot
   - Oui
+  - ResizeTrail
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

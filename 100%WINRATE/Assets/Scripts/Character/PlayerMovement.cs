@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviourPun
     private float targetSpeed;
     private float currentSpeed;
     private float rotationSpeed;
+    private float minimumSpeed;
 
     private void Start()
     {
@@ -67,6 +68,7 @@ public class PlayerMovement : MonoBehaviourPun
     {
         targetSpeed = DataManager.Instance.baseMoveSpeed;
         rotationSpeed = DataManager.Instance.rotationSpeed;
+        minimumSpeed = DataManager.Instance.minimumMoveSpeed;
         currentSpeed = targetSpeed;
         distanceFromWalls = baseDistanceFromWalls;
     }
@@ -76,6 +78,10 @@ public class PlayerMovement : MonoBehaviourPun
         if (photonView.IsMine)
         {
             targetSpeed += stats.movementSpeed;
+            if(targetSpeed <= minimumSpeed)
+            {
+                targetSpeed = minimumSpeed;
+            }
             currentSpeed = targetSpeed;
             distanceFromWalls += stats.bodySize / 2;
         }
