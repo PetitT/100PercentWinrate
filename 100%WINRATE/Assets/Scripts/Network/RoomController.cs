@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class RoomController : MonoBehaviourPunCallbacks
 {
     [SerializeField] private string GameSceneName;
+    [SerializeField] private string DuelSceneName;
     public UnityEvent onJoinedRoom;
 
     public override void OnEnable()
@@ -30,8 +31,16 @@ public class RoomController : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("Start Game");
-            PhotonNetwork.LoadLevel(GameSceneName);
+            if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue("FreeForAll"))
+            {
+                Debug.Log("Start FreeForAll");
+                PhotonNetwork.LoadLevel(GameSceneName);
+            }
+            else if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue("Duel"))
+            {
+                Debug.Log("Start Duel");
+                PhotonNetwork.LoadLevel(DuelSceneName);
+            }
         }
     }
 }
