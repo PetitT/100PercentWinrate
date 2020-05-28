@@ -25,7 +25,7 @@ public class DuelProjectileBehaviour : MonoBehaviour
         remainingLifetime -= Time.deltaTime;
         if(remainingLifetime <= 0)
         {
-            Dissapear();
+            Deactivate();
         }
     }
 
@@ -42,7 +42,7 @@ public class DuelProjectileBehaviour : MonoBehaviour
         }
         if (collision.CompareTag("Player"))
         {
-            Dissapear();
+            Deactivate();
         }
     }
 
@@ -52,7 +52,7 @@ public class DuelProjectileBehaviour : MonoBehaviour
         gameObject.transform.up = newDirection;
     }
 
-    private void Dissapear()
+    private void Deactivate()
     {
         gameObject.SetActive(false);
     }

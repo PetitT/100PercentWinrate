@@ -7,12 +7,10 @@ using Photon.Pun;
 public class DuelPlayerAttack : MonoBehaviourPun
 {
     [SerializeField] private DuelPlayerInput playerInput;
+    [SerializeField] private DuelPlayerAmmo ammo;
     [SerializeField] private PlayerWeaponCollider weaponCollider;
     [SerializeField] private Transform shootPosition;
     [SerializeField] private GameObject weapon;
-
-    private int maxAmmo;
-    private int currentAmmo;
 
     private float attackFrequency;
     private float remainingAttackFrequency;
@@ -23,20 +21,18 @@ public class DuelPlayerAttack : MonoBehaviourPun
 
     private void Start()
     {
-        playerInput.onShoot += OnShootHandler;
+        playerInput.onShootInput += OnShootHandler;
         attackFrequency = DuelDataManager.Instance.attackFrequency;
-        maxAmmo = DuelDataManager.Instance.maxAmmo;
-        currentAmmo = maxAmmo;
     }
 
     private void OnDestroy()
     {
-        playerInput.onShoot -= OnShootHandler;
+        playerInput.onShootInput -= OnShootHandler;
     }
 
     private void OnShootHandler()
     {
-        if (canShoot && !weaponCollider.IsColliding && currentAmmo > 0)
+        if (canShoot && !weaponCollider.IsColliding && ammo.HasAmmo())
         {
             Shoot();
         }
@@ -70,7 +66,6 @@ public class DuelPlayerAttack : MonoBehaviourPun
         onShoot?.Invoke();
         canShoot = false;
         remainingAttackFrequency = attackFrequency;
-        currentAmmo--;
     }
 
     [PunRPC]

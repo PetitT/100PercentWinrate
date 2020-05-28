@@ -23,7 +23,7 @@ public class DuelPlayerMovement : MonoBehaviourPun
 
     private void Start()
     {
-        input.onMove += OnMoveHandler;
+        input.onMoveInput += OnMoveHandler;
         cam = Camera.main;
 
         baseMoveSpeed = DuelDataManager.Instance.moveSpeed;
@@ -34,7 +34,7 @@ public class DuelPlayerMovement : MonoBehaviourPun
 
     private void OnDestroy()
     {
-        input.onMove -= OnMoveHandler;
+        input.onMoveInput -= OnMoveHandler;
     }
 
     private void OnMoveHandler(Vector2 movementVector)

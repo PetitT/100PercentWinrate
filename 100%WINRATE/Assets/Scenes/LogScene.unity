@@ -784,7 +784,7 @@ MonoBehaviour:
   moveSpeed: 4
   buffedMoveSpeed: 0
   rotationSpeed: 5
-  maxAmmo: 1000
+  maxAmmo: 5
   attackFrequency: 0.25
   projectile: {fileID: 804793952786041757, guid: b56b475fde5589f40914197ba0145b5d,
     type: 3}

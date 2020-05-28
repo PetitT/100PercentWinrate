@@ -8,6 +8,8 @@ TagManager:
   - Loot
   - Projectile
   - Slow
+  - Ammo
+  - Shield
   layers:
   - Default
   - TransparentFX

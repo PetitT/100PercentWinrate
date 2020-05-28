@@ -78,6 +78,11 @@ MonoBehaviour:
   - Oui
   - ResizeTrail
   - FireProjectile
+  - AddNewPlayer
+  - SetPlayerName
+  - StartRound
+  - SetPlayerNames
+  - SetPlayerProperties
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

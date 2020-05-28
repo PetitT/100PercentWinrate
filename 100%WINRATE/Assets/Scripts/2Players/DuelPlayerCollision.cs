@@ -1,18 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DuelPlayerCollision : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public event Action onHit;
+    public event Action onGetShield;
+    public event Action onGetAmmo;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Projectile"))
+        {
+            onHit?.Invoke();
+        }
+
+        if (collision.CompareTag("Shield"))
+        {
+            onGetShield?.Invoke();
+        }
+
+        if (collision.CompareTag("Ammo"))
+        {
+            onGetAmmo?.Invoke();
+        }
     }
 }

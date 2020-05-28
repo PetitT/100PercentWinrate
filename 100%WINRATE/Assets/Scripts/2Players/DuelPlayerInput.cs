@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class DuelPlayerInput : MonoBehaviourPun
 {
-    public event Action<Vector2> onMove;
-    public event Action onShoot;
+    public event Action<Vector2> onMoveInput;
+    public event Action onShootInput;
 
     private void Update()
     {
@@ -23,14 +23,14 @@ public class DuelPlayerInput : MonoBehaviourPun
         float X = Input.GetAxisRaw("Horizontal");
         float Y = Input.GetAxisRaw("Vertical");
 
-        onMove?.Invoke(new Vector2(X, Y));
+        onMoveInput?.Invoke(new Vector2(X, Y));
     }
 
     private void GetShootInput()
     {
         if (Input.GetMouseButton(0))
         {
-            onShoot?.Invoke();
+            onShootInput?.Invoke();
         }
     }
 }
