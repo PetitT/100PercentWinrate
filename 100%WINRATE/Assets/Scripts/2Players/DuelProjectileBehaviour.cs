@@ -7,11 +7,17 @@ public class DuelProjectileBehaviour : MonoBehaviour
 {
     private float remainingLifetime;
     private float speed;
+    private GameObject ammo;
+
+    private void Start()
+    {
+        ammo = DuelDataManager.Instance.ammo;
+        speed = DuelDataManager.Instance.projectileSpeed;        
+    }
 
     private void OnEnable()
     {
         remainingLifetime = DuelDataManager.Instance.projectileLifetime;
-        speed = DuelDataManager.Instance.projectileSpeed;
     }
 
     private void Update()
@@ -25,7 +31,7 @@ public class DuelProjectileBehaviour : MonoBehaviour
         remainingLifetime -= Time.deltaTime;
         if(remainingLifetime <= 0)
         {
-            Deactivate();
+            Deactivate(true);
         }
     }
 
@@ -42,7 +48,7 @@ public class DuelProjectileBehaviour : MonoBehaviour
         }
         if (collision.CompareTag("Player"))
         {
-            Deactivate();
+            Deactivate(false);
         }
     }
 
@@ -52,8 +58,12 @@ public class DuelProjectileBehaviour : MonoBehaviour
         gameObject.transform.up = newDirection;
     }
 
-    private void Deactivate()
+    private void Deactivate(bool spawnLoot)
     {
+        if (spawnLoot)
+        {
+            Pool.instance.GetItemFromPool(ammo, transform.position, Quaternion.identity);
+        }
         gameObject.SetActive(false);
     }
 }

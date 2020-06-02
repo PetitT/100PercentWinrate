@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8495400189774467504}
   - component: {fileID: 7531203485682541858}
   - component: {fileID: 1786075399714760768}
+  - component: {fileID: 6339066454602735711}
   m_Layer: 0
   m_Name: DuelProjectile
   m_TagString: Projectile
@@ -212,6 +213,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 381d3c1f787117442b1775511e840afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6339066454602735711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804793952786041757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c915f6cfdf8e240a45ea1862d920c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3762590559736442335

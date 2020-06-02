@@ -8,19 +8,50 @@ using UnityEngine;
 public class DuelUIManager : PunSingleton<DuelUIManager>
 {
     [SerializeField] private List<TextMeshProUGUI> playerNames;
+    [SerializeField] private List<GameObject> playerLives;
 
-    public void SetNames()
+    private List<GameObject> hearts = new List<GameObject>();
+
+    private Dictionary<int, TextMeshProUGUI> nameDisplay = new Dictionary<int, TextMeshProUGUI>();
+    private Dictionary<int, GameObject> livesDisplay = new Dictionary<int, GameObject>();
+
+    private void Start()
     {
-        photonView.RPC("SetPlayerNames", RpcTarget.All);
+        hearts.Add(DuelDataManager.Instance.redHeart);
+        hearts.Add(DuelDataManager.Instance.blueHeart);
+    }
+
+    public void AddPlayer(int playerNumber, int ID, string name, int lives)
+    {
+        photonView.RPC("AddNewPlayer", RpcTarget.AllBuffered,playerNumber, ID, name, lives);
+    }
+
+    public void UpdateLives(int ID, int lives)
+    {
+        photonView.RPC("UpdatePlayerLives", RpcTarget.All, ID, lives);
     }
 
     [PunRPC]
-    private void SetPlayerNames()
+    private void AddNewPlayer(int playerNumber, int ID, string name, int lives)
     {
-        Player[] players = PhotonNetwork.PlayerList;
-        for (int i = 0; i < players.Length ; i++)
+        nameDisplay.Add(ID, playerNames[playerNumber]);
+        livesDisplay.Add(ID, playerLives[playerNumber]);
+
+        nameDisplay[ID].text = name;
+
+        for (int i = 0; i < lives; i++)
         {
-            playerNames[i].text = players[i].NickName;
+            GameObject newLife = Pool.instance.GetItemFromPool(hearts[playerNumber], Vector3.zero, Quaternion.identity);
+            newLife.transform.SetParent(livesDisplay[ID].gameObject.transform);
         }
+    }
+
+    [PunRPC]
+    private void UpdatePlayerLives(int ID, int lives)
+    {
+        int lifes = livesDisplay[ID].transform.childCount -1;
+        GameObject lastHeart = livesDisplay[ID].transform.GetChild(lifes).gameObject;
+        lastHeart.transform.parent = null;
+        lastHeart.SetActive(false);
     }
 }

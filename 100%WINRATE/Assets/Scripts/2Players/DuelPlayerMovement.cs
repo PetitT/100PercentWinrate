@@ -7,10 +7,11 @@ using UnityEngine;
 public class DuelPlayerMovement : MonoBehaviourPun
 {
     [SerializeField] private DuelPlayerInput input;
+    [SerializeField] private DuelPlayerCollision collision;
+    [SerializeField] private DuelPlayerManager manager;
     [SerializeField] private GameObject weaponModel;
     [SerializeField] private GameObject bodyModel;
     [SerializeField] private GameObject avatar;
-    [SerializeField] private DuelPlayerCollision collision;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float distanceFromWalls;
     private Camera cam;
@@ -18,28 +19,45 @@ public class DuelPlayerMovement : MonoBehaviourPun
     private float buffedMoveSpeed;
     private float currentSpeed;
     private float rotationSpeed;
+    private float speedBoostDuration;
 
     private Vector2 movement = Vector2.zero;
 
     private void Start()
     {
         input.onMoveInput += OnMoveHandler;
-        cam = Camera.main;
+        collision.onSpeedBoost += SpeedBoostHandler;
+        manager.onReset += OnResetHandler;
 
         baseMoveSpeed = DuelDataManager.Instance.moveSpeed;
         buffedMoveSpeed = DuelDataManager.Instance.buffedMoveSpeed;
         rotationSpeed = DuelDataManager.Instance.rotationSpeed;
+        speedBoostDuration = DuelDataManager.Instance.speedBoostDuration;
         currentSpeed = baseMoveSpeed;
+        cam = Camera.main;
     }
 
     private void OnDestroy()
     {
         input.onMoveInput -= OnMoveHandler;
+        collision.onSpeedBoost -= SpeedBoostHandler;
+        manager.onReset -= OnResetHandler;
+    }
+
+    private void SpeedBoostHandler()
+    {
+        StartCoroutine("BoostSpeed");
     }
 
     private void OnMoveHandler(Vector2 movementVector)
     {
         movement = movementVector.normalized;
+    }
+
+    private void OnResetHandler()
+    {
+        StopCoroutine("BoostSpeed");
+        currentSpeed = baseMoveSpeed;
     }
 
     private void Update()
@@ -49,6 +67,13 @@ public class DuelPlayerMovement : MonoBehaviourPun
             Move();
             RotateWeapon();
         }
+    }
+
+    private IEnumerator BoostSpeed()
+    {
+        currentSpeed = buffedMoveSpeed;
+        yield return new WaitForSeconds(speedBoostDuration);
+        currentSpeed = baseMoveSpeed;
     }
 
     private void Move()

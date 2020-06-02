@@ -83,6 +83,22 @@ MonoBehaviour:
   - StartRound
   - SetPlayerNames
   - SetPlayerProperties
+  - EndGame
+  - StartGame
+  - StartNewRound
+  - UpdatePlayersUI
+  - SetAvatarColor
+  - ModifyScore
+  - GameOver
+  - UpdatePlayerLives
+  - UpdatePlayers
+  - UpdateScores
+  - PickNewMap
+  - UpdatePlayerAmmo
+  - ToggleShield
+  - ToggleTrails
+  - CreateAmmo
+  - Display
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

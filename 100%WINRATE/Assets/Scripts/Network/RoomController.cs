@@ -23,7 +23,6 @@ public class RoomController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("Joined Room");
         onJoinedRoom?.Invoke();
     }
 
@@ -33,12 +32,10 @@ public class RoomController : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue("FreeForAll"))
             {
-                Debug.Log("Start FreeForAll");
                 PhotonNetwork.LoadLevel(GameSceneName);
             }
             else if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue("Duel"))
             {
-                Debug.Log("Start Duel");
                 PhotonNetwork.LoadLevel(DuelSceneName);
             }
         }

@@ -10,6 +10,7 @@ TagManager:
   - Slow
   - Ammo
   - Shield
+  - Speed
   layers:
   - Default
   - TransparentFX

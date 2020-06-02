@@ -4,56 +4,66 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Photon.Realtime;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
+using System;
+using System.Linq;
 
 public class DuelGameManager : PunSingleton<DuelGameManager>
 {
-    [SerializeField] private List<Transform> startPositions;
+    private Dictionary<int, int> playersIDHealth = new Dictionary<int, int>();
+    public Dictionary<int, int> PlayersIDHealth { get => playersIDHealth; private set => playersIDHealth = value; }
 
-    private Player[] players;
-    private int currentRound;
+    public event Action onNewRoundStart;
 
-    private void Start()
+    public void AddPlayer(int newPlayer, int health)
     {
-        CreateAvatar();
-        photonView.RPC("AddNewPlayer", RpcTarget.AllBuffered);
-        if (PhotonNetwork.PlayerList.Length == 2)
-        {
-            StartCoroutine("WaitToStartRound");
-        }
+        photonView.RPC("UpdatePlayers", RpcTarget.AllBuffered, newPlayer, health);
     }
 
-    private void CreateAvatar()
+    public void StartGame()
     {
-        string playerPrefab = Path.Combine(StringsManager.Instance.duel, StringsManager.Instance.duelPlayer);
-        GameObject newPlayerObject = PhotonNetwork.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-
-        Hashtable table = new Hashtable();
-        int avatarID = newPlayerObject.GetComponentInChildren<AvatarTag>().GetComponent<PhotonView>().ViewID;
-        table.Add("ID", avatarID);
-        PhotonNetwork.LocalPlayer.SetCustomProperties(table);
+        photonView.RPC("StartNewRound", RpcTarget.AllBuffered);
     }
 
-    private IEnumerator WaitToStartRound()
+    public void LoseRound(int ID)
     {
-        yield return new WaitForSeconds(1);
-        photonView.RPC("StartRound", RpcTarget.All);
+        photonView.RPC("UpdateScores", RpcTarget.All, ID);
+    }
+
+    public void EndGame()
+    {
+        photonView.RPC("GameOver", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
-    private void AddNewPlayer()
+    private void UpdateScores(int ID)
     {
-        DuelUIManager.Instance.SetNames();
+        PlayersIDHealth[ID]--;
+        DuelUIManager.Instance.UpdateLives(ID, PlayersIDHealth[ID]);
+        if (PlayersIDHealth[ID] <= 0)
+        {
+            GameOver();
+        }
+        else
+        {
+            photonView.RPC("StartNewRound", RpcTarget.All);
+        }
     }
 
     [PunRPC]
-    private void StartRound()
+    private void UpdatePlayers(int newPlayer, int health)
     {
-        players = PhotonNetwork.PlayerList;
-        for (int i = 0; i < players.Length; i++)
-        {
-            GameObject avatar = PhotonView.Find((int)players[i].CustomProperties["ID"]).gameObject;
-            avatar.transform.position = startPositions[i].position;
-        }
+        PlayersIDHealth.Add(newPlayer, health);
+    }
+
+    [PunRPC]
+    private void StartNewRound()
+    {
+        onNewRoundStart?.Invoke();
+    }
+
+    [PunRPC]
+    private void GameOver()
+    {
+        Debug.Log("End Game");
     }
 }

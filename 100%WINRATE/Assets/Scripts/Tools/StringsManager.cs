@@ -13,4 +13,13 @@ public class StringsManager : Singleton<StringsManager>
     public string playerEntry;
     public string poolParent;
     public string musicGameobject;
+
+    [Header("Duel")]
+    public string roundProperty;
+    public string playerIDProperty;
+    public string scoreProperty;
+    public string isPlayerFirst;
+    public string playersInRoom;
+    public string first;
+    public string second;
 }
