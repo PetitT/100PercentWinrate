@@ -328,8 +328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collision: {fileID: 8180743648168887185}
-  lootParticle: {fileID: 8403440093764004287, guid: b0a630455f5103b4d8d249ac1465faa0,
-    type: 3}
   avatar: {fileID: 9111023291045335213}
 --- !u!114 &1919936506634461852
 MonoBehaviour:
@@ -338,7 +336,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138338860054949886}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ec37d47b60664a4e8468639098db294, type: 3}
   m_Name: 

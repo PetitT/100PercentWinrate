@@ -51,6 +51,12 @@ public class DataManager : Singleton<DataManager>
     public AudioClip deathSound;
     public AudioClip hitSound;
     public AudioClip lootSound;
+    public AudioClip ammoSound;
+
+    [Header("Particles")]
+    public GameObject wallHitParticle;
+    public GameObject playerHitParticle;
+    public GameObject lootParticle;
 
     [Header("Cheats")]
     public string statsBuffCheat;

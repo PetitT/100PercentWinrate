@@ -12,7 +12,17 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
     private Dictionary<int, int> playersIDHealth = new Dictionary<int, int>();
     public Dictionary<int, int> PlayersIDHealth { get => playersIDHealth; private set => playersIDHealth = value; }
 
+    private float roundPause;
+    private float timeScaleSlow;
+
     public event Action onNewRoundStart;
+    public event Action onRoundPause;
+
+    private void Start()
+    {
+        roundPause = DuelDataManager.Instance.roundPause;
+        timeScaleSlow = DuelDataManager.Instance.timeSlow;
+    }
 
     public void AddPlayer(int newPlayer, int health)
     {
@@ -37,8 +47,17 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
     [PunRPC]
     private void UpdateScores(int ID)
     {
+        onRoundPause?.Invoke();
         PlayersIDHealth[ID]--;
         DuelUIManager.Instance.UpdateLives(ID, PlayersIDHealth[ID]);
+        StartCoroutine(RoundPauseWait(ID));
+    }
+
+    private IEnumerator RoundPauseWait(int ID)
+    {
+        Time.timeScale = timeScaleSlow;
+        yield return new WaitForSecondsRealtime(roundPause);
+
         if (PlayersIDHealth[ID] <= 0)
         {
             GameOver();
@@ -58,6 +77,7 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
     [PunRPC]
     private void StartNewRound()
     {
+        MusicManager.Instance.BlendInHighPass();
         onNewRoundStart?.Invoke();
     }
 

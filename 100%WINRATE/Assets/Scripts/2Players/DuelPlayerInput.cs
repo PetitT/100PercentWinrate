@@ -9,12 +9,23 @@ public class DuelPlayerInput : MonoBehaviourPun
     public event Action<Vector2> onMoveInput;
     public event Action onShootInput;
 
+    private bool canInput = true;
+
+    public void ToggleInputs(bool toggle)
+    {
+        canInput = toggle;
+        onMoveInput?.Invoke(Vector2.zero);
+    }
+
     private void Update()
     {
-        if (photonView.IsMine)
+        if (canInput)
         {
-            GetMoveInput();
-            GetShootInput();
+            if (photonView.IsMine)
+            {
+                GetMoveInput();
+                GetShootInput();
+            }
         }
     }
 

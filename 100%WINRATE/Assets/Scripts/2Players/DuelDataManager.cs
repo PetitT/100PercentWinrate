@@ -35,4 +35,8 @@ public class DuelDataManager : Singleton<DuelDataManager>
     public GameObject redHeart;
     public GameObject blueHeart;
     public GameObject ammoUI;
+
+    [Header("Others")]
+    public float roundPause;
+    public float timeSlow;
 }

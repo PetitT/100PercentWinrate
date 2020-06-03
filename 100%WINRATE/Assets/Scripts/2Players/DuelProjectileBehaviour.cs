@@ -8,11 +8,15 @@ public class DuelProjectileBehaviour : MonoBehaviour
     private float remainingLifetime;
     private float speed;
     private GameObject ammo;
+    private GameObject bounceParticle;
+    private GameObject playerHitParticle;
 
     private void Start()
     {
         ammo = DuelDataManager.Instance.ammo;
-        speed = DuelDataManager.Instance.projectileSpeed;        
+        speed = DuelDataManager.Instance.projectileSpeed;
+        bounceParticle = DataManager.Instance.wallHitParticle;
+        playerHitParticle = DataManager.Instance.playerHitParticle;
     }
 
     private void OnEnable()
@@ -45,9 +49,11 @@ public class DuelProjectileBehaviour : MonoBehaviour
         if (collision.CompareTag("Wall"))
         {
             UpdateRotation(collision);
+            Pool.instance.GetItemFromPool(bounceParticle, transform.position, Quaternion.identity);
         }
         if (collision.CompareTag("Player"))
         {
+            Pool.instance.GetItemFromPool(playerHitParticle, transform.position, Quaternion.identity);
             Deactivate(false);
         }
     }

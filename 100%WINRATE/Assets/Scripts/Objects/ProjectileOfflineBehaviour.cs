@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class ProjectileOfflineBehaviour : MonoBehaviour
 {
-    [SerializeField] private GameObject playerHitParticle;
-    [SerializeField] private GameObject obstacleHitParticle;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private TrailRenderer trail;
+    private GameObject playerHitParticle;
+    private GameObject obstacleHitParticle;
     private float projectileHitParticleScale;
     private float lifeTime;
     private float remainingLifeTime;
@@ -22,6 +22,8 @@ public class ProjectileOfflineBehaviour : MonoBehaviour
 
     public void Initialize(float projectileSpeed, float projectileDamage, float size, Vector2 projectileRotation, int shooterID, Color projectileColor)
     {
+        playerHitParticle = DataManager.Instance.playerHitParticle;
+        obstacleHitParticle = DataManager.Instance.wallHitParticle;
         speed = projectileSpeed;
         Damage = projectileDamage;
         ID = shooterID;

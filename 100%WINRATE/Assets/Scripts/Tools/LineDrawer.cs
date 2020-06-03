@@ -13,6 +13,7 @@ public class LineDrawer : MonoBehaviour
     float mapWidth;
     float mapHeigth;
     [SerializeField] float distanceBetweenLines;
+    [SerializeField] float lineScale = 1;
     [SerializeField] float distanceFromCamera = 100;
 
     private void Start()
@@ -27,7 +28,6 @@ public class LineDrawer : MonoBehaviour
 
         float remainingWidth = mapWidth;
         float remainingHeigth = mapHeigth;
-
 
         while (remainingWidth > 0)
         {
@@ -53,6 +53,7 @@ public class LineDrawer : MonoBehaviour
         LineRenderer renderer = newLine.GetComponent<LineRenderer>();
         renderer.SetPosition(0, pos0);
         renderer.SetPosition(1, pos1);
+        renderer.widthMultiplier = lineScale;
         newLine.transform.position = new Vector3(newLine.transform.position.x, newLine.transform.position.y, 1000000);
     }
 }

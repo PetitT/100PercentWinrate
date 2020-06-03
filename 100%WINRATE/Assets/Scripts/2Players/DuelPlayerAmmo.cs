@@ -23,6 +23,8 @@ public class DuelPlayerAmmo : MonoBehaviourPun
         maxAmmo = DuelDataManager.Instance.maxAmmo;
         startAmmo = DuelDataManager.Instance.startAmmo;
         OnResetHandler();
+        //currentAmmo = 0;
+        ammoDisplay.DisplayAmmo(currentAmmo);
     }
 
     private void OnDestroy()

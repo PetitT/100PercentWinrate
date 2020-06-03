@@ -24,7 +24,11 @@ public class DuelMapManager : PunSingleton<DuelMapManager>
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            int random = UnityEngine.Random.Range(0, maps.Count);
+            int random = maps.IndexOf(currentMap);
+            while (random == maps.IndexOf(currentMap))
+            {
+                random = UnityEngine.Random.Range(0, maps.Count);
+            }
             photonView.RPC("PickNewMap", RpcTarget.All, random);
         }
     }

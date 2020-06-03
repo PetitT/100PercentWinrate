@@ -35,6 +35,10 @@ public class DuelAmmoDisplay : MonoBehaviourPun
             newAmmo.transform.SetParent(ammoParent.transform);
             ammos.Add(newAmmo);
         }
+        for (int i = 0; i < ammos.Count; i++)
+        {
+            ammos[i].SetActive(false);
+        }
     }
 
     [PunRPC]

@@ -534,6 +534,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1250649516}
+        m_MethodName: BlendInHighPass
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &84614808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,6 +734,13 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
   hitSound: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
   lootSound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
+  ammoSound: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
+  wallHitParticle: {fileID: 6749049917071146343, guid: c158b4c764964984586a4075b62951b4,
+    type: 3}
+  playerHitParticle: {fileID: 814520012166164126, guid: 9fc1bc713b0e4984380a008d1760dcfd,
+    type: 3}
+  lootParticle: {fileID: 8403440093764004287, guid: b0a630455f5103b4d8d249ac1465faa0,
+    type: 3}
   statsBuffCheat: cheat
   statsBuffAmount: 10
   growSpeed: 0.05
@@ -812,6 +830,8 @@ MonoBehaviour:
   blueHeart: {fileID: 8791641134933559833, guid: b51a2983c59c76c429ba8911c45a8a62,
     type: 3}
   ammoUI: {fileID: 4632798506045817221, guid: e7922b08247264a418c09fdff5a6a5ba, type: 3}
+  roundPause: 2
+  timeSlow: 0.25
 --- !u!1 &178548272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,6 +1610,7 @@ MonoBehaviour:
   topRight: {fileID: 615729596}
   lineParent: {fileID: 425352610}
   distanceBetweenLines: 4.25
+  lineScale: 1
   distanceFromCamera: 100
 --- !u!1 &432894463
 GameObject:
@@ -3772,7 +3793,7 @@ AudioHighPassFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250649511}
   m_Enabled: 1
-  m_CutoffFrequency: 10
+  m_CutoffFrequency: 2500
   m_HighpassResonanceQ: 1
 --- !u!114 &1250649516
 MonoBehaviour:
@@ -3788,6 +3809,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1250649512}
   highPassFilter: {fileID: 1250649515}
+  maxHighPassValue: 2500
+  blendSpeed: 1250
 --- !u!1001 &1373425211
 PrefabInstance:
   m_ObjectHideFlags: 0
