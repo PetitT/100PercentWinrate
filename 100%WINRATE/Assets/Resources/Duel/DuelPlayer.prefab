@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 3313639525733390107}
   - component: {fileID: 5291905900526079896}
   - component: {fileID: 1935284415566952227}
+  - component: {fileID: 5718498614540098799}
   m_Layer: 0
   m_Name: DuelPlayer
   m_TagString: Player
@@ -162,6 +163,7 @@ MonoBehaviour:
   health: {fileID: 488253603912209921}
   input: {fileID: 3809542824835461838}
   collision: {fileID: 3352438366410809459}
+  avatar: {fileID: 8322629787246624060}
   body: {fileID: 3122327900050586540}
 --- !u!114 &3111521378920726998
 MonoBehaviour:
@@ -247,6 +249,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1656054714568269237}
   collision: {fileID: 4873486141183060595}
+--- !u!114 &5718498614540098799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199004947585630831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193aad16e2710e544998e27a59242b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 8322629787246624060}
 --- !u!1 &862153021687935709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,7 +1353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7018687763209537309
 Transform:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class DuelLootSpawner : MonoBehaviourPun
     private List<GameObject> loots = new List<GameObject>();
     private GameObject currentLoot = null;
     private bool activeLoot = false;
+    private bool canSpawnLoot = false;
+    private float timeBetweenLoots;
+    private float remainingTimeBetweenLoots;
 
     private void Start()
     {
@@ -26,6 +29,8 @@ public class DuelLootSpawner : MonoBehaviourPun
             loots.Add(DuelDataManager.Instance.speedBoost);
         }
         DuelGameManager.Instance.onNewRoundStart += OnNewRoundHandler;
+        timeBetweenLoots = DuelDataManager.Instance.timeBetweenLoots;
+        remainingTimeBetweenLoots = timeBetweenLoots;
     }
 
     private void Update()
@@ -35,13 +40,26 @@ public class DuelLootSpawner : MonoBehaviourPun
             if (!currentLoot.activeSelf)
             {
                 activeLoot = false;
+                remainingTimeBetweenLoots = timeBetweenLoots;
             }
         }
+
+        canSpawnLoot = remainingTimeBetweenLoots <= 0;
+        if (canSpawnLoot)
+        {
+            CreateLoot();
+        }
+        CountDown();
     }
 
     private void OnDestroy()
     {
         DuelGameManager.Instance.onNewRoundStart -= OnNewRoundHandler;
+    }
+
+    private void CountDown()
+    {
+        remainingTimeBetweenLoots -= Time.deltaTime;
     }
 
     private void OnNewRoundHandler()

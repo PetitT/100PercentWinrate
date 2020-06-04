@@ -25,18 +25,10 @@ public class DuelPlayerReposition : MonoBehaviourPun
     private void OnResetHandler()
     {
         photonView.RPC("ToggleTrails", RpcTarget.All, false);
-        StartCoroutine("Pause");
         int ID = playerManager.playerID;
         Transform newPosition = DuelMapManager.Instance.currentMap.startPositions[ID];
         avatar.transform.position = newPosition.position;
         photonView.RPC("ToggleTrails", RpcTarget.All, true);
-    }
-
-    private IEnumerator Pause()
-    {
-        Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(2);
-        Time.timeScale = 1f;
     }
 
     [PunRPC]

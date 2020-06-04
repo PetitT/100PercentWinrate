@@ -17,6 +17,7 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
 
     public event Action onNewRoundStart;
     public event Action onRoundPause;
+    public event Action<string> onGameOver;
 
     private void Start()
     {
@@ -57,6 +58,7 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
     {
         Time.timeScale = timeScaleSlow;
         yield return new WaitForSecondsRealtime(roundPause);
+        Time.timeScale = 1;
 
         if (PlayersIDHealth[ID] <= 0)
         {
@@ -84,6 +86,16 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
     [PunRPC]
     private void GameOver()
     {
-        Debug.Log("End Game");
+        int winnerID = playersIDHealth.Where(player => player.Value != 0).FirstOrDefault().Key;
+        Player winner = PhotonView.Find(winnerID).Owner;
+        onGameOver?.Invoke(winner.NickName);
+        StartCoroutine("Finish");
+    }
+
+    private IEnumerator Finish()
+    {
+        yield return new WaitForSeconds(5);
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel("LogScene");
     }
 }

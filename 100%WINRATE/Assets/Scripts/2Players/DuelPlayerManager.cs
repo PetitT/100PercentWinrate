@@ -9,6 +9,7 @@ public class DuelPlayerManager : MonoBehaviourPun
     [SerializeField] private DuelPlayerHealth health;
     [SerializeField] private DuelPlayerInput input;
     [SerializeField] private BoxCollider2D collision;
+    [SerializeField] private GameObject avatar;
     [SerializeField] private GameObject body;
     public int playerID { get; private set; }
 
@@ -44,6 +45,7 @@ public class DuelPlayerManager : MonoBehaviourPun
 
     private void OnDeathHandler()
     {
+        avatar.SetActive(false);
         DuelGameManager.Instance.LoseRound(photonView.ViewID);
     }
 
@@ -55,7 +57,7 @@ public class DuelPlayerManager : MonoBehaviourPun
     private void Reset()
     {
         onReset?.Invoke();
+        avatar.SetActive(true);
         collision.enabled = true;
-        input.ToggleInputs(true);
     }
 }

@@ -30,6 +30,7 @@ public class DuelDataManager : Singleton<DuelDataManager>
     public int ammoLootPropability;
     public int shieldLootProbability;
     public int speedBoostProbability;
+    public float timeBetweenLoots;
 
     [Header("UI")]
     public GameObject redHeart;

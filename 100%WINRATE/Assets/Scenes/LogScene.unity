@@ -808,7 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lives: 8
   moveSpeed: 4
-  buffedMoveSpeed: 8
+  buffedMoveSpeed: 6
   speedBoostDuration: 5
   rotationSpeed: 5
   maxAmmo: 10
@@ -825,6 +825,7 @@ MonoBehaviour:
   ammoLootPropability: 5
   shieldLootProbability: 1
   speedBoostProbability: 3
+  timeBetweenLoots: 5
   redHeart: {fileID: 7350772714883915577, guid: 112d58159caba9940a9975a4da5ec9a8,
     type: 3}
   blueHeart: {fileID: 8791641134933559833, guid: b51a2983c59c76c429ba8911c45a8a62,
