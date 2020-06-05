@@ -6,6 +6,7 @@ using System.IO;
 using Photon.Realtime;
 using System;
 using System.Linq;
+using ExitGames.Client.Photon;
 
 public class DuelGameManager : PunSingleton<DuelGameManager>
 {
@@ -19,10 +20,18 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
     public event Action onRoundPause;
     public event Action<string> onGameOver;
 
+    private const byte onLostRoundCode = 1;
+
     private void Start()
     {
         roundPause = DuelDataManager.Instance.roundPause;
         timeScaleSlow = DuelDataManager.Instance.timeSlow;
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkEventReceived;
+    }
+
+    private void OnDestroy()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkEventReceived;
     }
 
     public void AddPlayer(int newPlayer, int health)
@@ -32,12 +41,22 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
 
     public void StartGame()
     {
-        photonView.RPC("StartNewRound", RpcTarget.AllBuffered);
+        StartNewRound();
     }
 
-    public void LoseRound(int ID)
+    private void NetworkEventReceived(EventData obj)
     {
-        photonView.RPC("UpdateScores", RpcTarget.All, ID);
+        if (obj.Code == DuelDataManager.Instance.onGameStartEvent)
+        {
+            StartNewRound();
+        }
+
+        if (obj.Code == DuelDataManager.Instance.onLostRoundEvent)
+        {
+            object[] datas = (object[])obj.CustomData;
+            int ID = (int)datas[0];
+            UpdateScores(ID);
+        }
     }
 
     public void EndGame()
@@ -45,7 +64,6 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
         photonView.RPC("GameOver", RpcTarget.AllBuffered);
     }
 
-    [PunRPC]
     private void UpdateScores(int ID)
     {
         onRoundPause?.Invoke();
@@ -66,7 +84,7 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
         }
         else
         {
-            photonView.RPC("StartNewRound", RpcTarget.All);
+            StartNewRound();
         }
     }
 
@@ -76,14 +94,12 @@ public class DuelGameManager : PunSingleton<DuelGameManager>
         PlayersIDHealth.Add(newPlayer, health);
     }
 
-    [PunRPC]
     private void StartNewRound()
     {
         MusicManager.Instance.BlendInHighPass();
         onNewRoundStart?.Invoke();
     }
 
-    [PunRPC]
     private void GameOver()
     {
         int winnerID = playersIDHealth.Where(player => player.Value != 0).FirstOrDefault().Key;

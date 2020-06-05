@@ -27,7 +27,7 @@ public class DuelDataManager : Singleton<DuelDataManager>
     public GameObject ammo;
     public GameObject shield;
     public GameObject speedBoost;
-    public int ammoLootPropability;
+    public int ammoLootProbability;
     public int shieldLootProbability;
     public int speedBoostProbability;
     public float timeBetweenLoots;
@@ -40,4 +40,9 @@ public class DuelDataManager : Singleton<DuelDataManager>
     [Header("Others")]
     public float roundPause;
     public float timeSlow;
+    public float boundsTeleportSecurityDistance;
+
+    [Header("EventBytes")]
+    public byte onGameStartEvent;
+    public byte onLostRoundEvent;
 }

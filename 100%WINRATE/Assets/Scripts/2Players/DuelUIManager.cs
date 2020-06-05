@@ -28,7 +28,7 @@ public class DuelUIManager : PunSingleton<DuelUIManager>
 
     public void UpdateLives(int ID, int lives)
     {
-        photonView.RPC("UpdatePlayerLives", RpcTarget.All, ID, lives);
+        UpdatePlayerLives(ID, lives);
     }
 
     [PunRPC]
@@ -46,7 +46,6 @@ public class DuelUIManager : PunSingleton<DuelUIManager>
         }
     }
 
-    [PunRPC]
     private void UpdatePlayerLives(int ID, int lives)
     {
         int lifes = livesDisplay[ID].transform.childCount -1;

@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Realtime;
+using ExitGames.Client.Photon;
 
 public class DuelGameSetup : MonoBehaviourPun
 {
@@ -40,7 +41,9 @@ public class DuelGameSetup : MonoBehaviourPun
     private IEnumerator GameStart()
     {
         yield return new WaitForSeconds(1f);
-        DuelGameManager.Instance.StartGame();
+        byte startGameEvent = DuelDataManager.Instance.onGameStartEvent;
+        RaiseEventOptions options = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
+        PhotonNetwork.RaiseEvent(startGameEvent, null, options, SendOptions.SendReliable);
     }
 
     private void CreateAvatar()

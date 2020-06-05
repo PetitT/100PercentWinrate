@@ -100,6 +100,8 @@ MonoBehaviour:
   - CreateAmmo
   - Display
   - AmmoSound
+  - SetRandomValues
+  - ToggleAvatar
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
