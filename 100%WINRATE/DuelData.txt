@@ -1,0 +1,17 @@
+Name:lives|IValue:7;
+Name:moveSpeed|FValue:3.75;
+Name:buffedMoveSpeed|FValue:6;
+Name:speedBoostDuration|FValue:5;
+Name:rotationSpeed|FValue:5;
+Name:maxAmmo|IValue:10;
+Name:startAmmo|IValue:5;
+Name:attackFrequency|FValue:0.25;
+Name:projectileSpeed|FValue:7.5;
+Name:projectileLifetime|FValue:3;
+Name:ammoLootProbability|IValue:5;
+Name:shieldLootProbability|IValue:2;
+Name:speedBoostProbability|IValue:3;
+Name:timeBetweenLoots|FValue:5;
+Name:roundPause|FValue:2;
+Name:timeSlow|FValue:0.25;
+Name:boundsTeleportSecurityDistance|FValue:0.25;
