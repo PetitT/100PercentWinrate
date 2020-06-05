@@ -5,7 +5,7 @@ Name:speedBoostDuration|FValue:5;
 Name:rotationSpeed|FValue:5;
 Name:maxAmmo|IValue:10;
 Name:startAmmo|IValue:5;
-Name:attackFrequency|fValue:0.25;
+Name:attackFrequency|FValue:0.25;
 Name:projectileSpeed|FValue:7.5;
 Name:projectileLifetime|FValue:3;
 Name:ammoLootProbability|IValue:5;
