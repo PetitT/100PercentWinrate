@@ -1,5 +1,7 @@
-Name:lives|Value:7;
-Name:moveSpeed|Value:4;
+Name:lives|IValue:7;
+Name:moveSpeed|FValue:4;
+Name:test|BValue:1;
+Name:testString|SValue:Bien joué;
 Name:buffedMoveSpeed|Value:6;
 Name:speedBoostDuration|Value:5;
 Name:rotationSpeed|Value:5;
