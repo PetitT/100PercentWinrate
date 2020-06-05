@@ -1,5 +1,5 @@
 Name:lives|IValue:7;
-Name:moveSpeed|FValue:4;
+Name:moveSpeed|FValue:3.75;
 Name:test|BValue:1;
 Name:testString|SValue:Bien joué;
 Name:buffedMoveSpeed|Value:6;
